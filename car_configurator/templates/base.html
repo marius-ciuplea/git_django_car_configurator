@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <style>
+      body{
+        font-family: Arial, sans-serif;
+      }
+
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+
+      .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .main-content {
+        flex: 1; /* Takes all available vertical space */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      {% include 'navbar.html' %}
+
+      <hr class="contact_page-line" />
+
+      <main class="main-content">
+        {% block content %}{% endblock %}
+      </main>
+
+      <hr class="contact_page-line" />
+      
+      {% include 'footer.html' %}
+    </div>
+
+    {% if messages %}
+      <div class="messages">
+        {% for message in messages %}
+          <div class="message {{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <script src="{% static 'js/script.js' %}"></script>
+  </body>
+</html>

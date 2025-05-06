@@ -1,0 +1,184 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Car Carousel</title>
+
+    <style>
+      .container {
+        background-color: antiquewhite;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .carousel {
+        position: relative;
+        width: 70%;
+        max-width: 700px;
+        margin-left: 40px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+
+      .carousel-image {
+        width: 100%;
+        flex-shrink: 0;
+        object-fit: cover;
+      }
+
+      .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.4);
+        color: white;
+        border: none;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 8px 12px;
+        z-index: 1;
+        border-radius: 50%;
+        transition: background 0.3s;
+      }
+
+      .carousel-btn:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+
+      .carousel-btn.prev {
+        left: 10px;
+      }
+
+      .carousel-btn.next {
+        right: 10px;
+      }
+
+      .colors-container {
+        display: flex;
+        width: 50%;
+        justify-content: center;
+        flex-direction: row;
+        background-color: rgb(200, 227, 161);
+        align-items: center;
+      }
+
+      .colors {
+        padding: 20px;
+      }
+
+      .colors img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+      .options-container {
+        display: flex;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center">Car Carousel</h1>
+    <div class="container">
+      <div class="carousel">
+        <div class="carousel-track">
+          <img
+            src="{% static 'images/default-car.jpg' %}"
+            class="carousel-image"
+            alt="Car 1"
+          />
+          <img
+            src="{% static 'images/default-car.jpg' %}"
+            class="carousel-image"
+            alt="Car 2"
+          />
+          <img
+            src="{% static 'images/default-car.jpg' %}"
+            class="carousel-image"
+            alt="Car 3"
+          />
+        </div>
+        <button class="carousel-btn prev">&#10094;</button>
+        <button class="carousel-btn next">&#10095;</button>
+      </div>
+
+      <div class="colors-container">
+        <div class="options-container">
+          <span>Colors </span>
+          <span>Wheels</span>
+          <span>Engine</span>
+        </div>
+        <span class="colors"
+          ><img src="{% static 'images/color-blue.png' %}" alt=""
+        /></span>
+        <span class="colors"
+          ><img src="{% static 'images/color-white.png' %}" alt=""
+        /></span>
+        <span class="colors"
+          ><img src="{% static 'images/color-black.png' %}" alt=""
+        /></span>
+      </div>
+    </div>
+
+    {% for image in car_model.images.all %}
+    <div>
+      <img src="{{ image.image.url }}" alt="image" />
+    </div>
+    {% endfor %}
+
+    <div>
+      <h2>Configure {{ car.company_name }} {{ car.model_name }}</h2>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <p><strong>Base Price:</strong> {{ form.base_price.value }} €</p>
+
+        {{ form.engine.label_tag }} {{ form.engine }}
+        <br />
+        {{ form.color.label_tag }} {{ form.color }}
+        <br />
+        {{ form.wheel.label_tag }} {{ form.wheel }}
+        <br /><br />
+
+        <button type="submit">Save Configuration</button>
+      </form>
+    </div>
+
+    <script>
+      const track = document.querySelector(".carousel-track");
+      const images = document.querySelectorAll(".carousel-image");
+      const prevBtn = document.querySelector(".carousel-btn.prev");
+      const nextBtn = document.querySelector(".carousel-btn.next");
+
+      let currentIndex = 0;
+
+      function updateCarousel() {
+        const width = images[0].clientWidth;
+        track.style.transform = `translateX(-${currentIndex * width}px)`;
+      }
+
+      nextBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateCarousel();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateCarousel();
+      });
+
+      window.addEventListener("resize", updateCarousel);
+      window.addEventListener("load", updateCarousel);
+    </script>
+  </body>
+</html>

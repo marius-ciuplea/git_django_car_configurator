@@ -1,0 +1,501 @@
+[
+  {
+    "model": "main.carmodel",
+    "pk": 1,
+    "fields": {
+      "company_name": "Volkswagen",
+      "model_name": "Tiguan"
+    
+    }
+  },
+  {
+    "model": "main.carmodel",
+    "pk": 2,
+    "fields": {
+      "company_name": "Volkswagen",
+      "model_name": "Golf"
+      
+    }
+  },
+  {
+    "model": "main.carmodel",
+    "pk": 3,
+    "fields": {
+      "company_name": "Volkswagen",
+      "model_name": "ID7"
+      
+    }
+  },
+  {
+    "model": "main.carmodel",
+    "pk": 4,
+    "fields": {
+      "company_name": "Volkswagen",
+      "model_name": "Passat"
+    }
+  },
+  {
+    "model": "main.carmodel",
+    "pk": 5,
+    "fields": {
+      "company_name": "Volkswagen",
+      "model_name": "Polo"
+    
+    }
+  },
+  {
+    "model": "main.carmodel",
+    "pk": 6,
+    "fields": {
+      "company_name": "Volkswagen",
+      "model_name": "Touareg"
+      
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 1,
+    "fields": {
+      "car_model": 1,
+      "name": "Black",
+      "hex_code": "#000000"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 2,
+    "fields": {
+      "car_model": 1,
+      "name": "White",
+      "hex_code": "#FFFFFF"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 3,
+    "fields": {
+      "car_model": 1,
+      "name": "Blue",
+      "hex_code": "#3C7599"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 4,
+    "fields": {
+      "car_model": 2,
+      "name": "Black",
+      "hex_code": "#000000"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 5,
+    "fields": {
+      "car_model": 2,
+      "name": "White",
+      "hex_code": "#FFFFFF"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 6,
+    "fields": {
+      "car_model": 2,
+      "name": "Blue",
+      "hex_code": "#3C7599"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 7,
+    "fields": {
+      "car_model": 3,
+      "name": "Black",
+      "hex_code": "#000000"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 8,
+    "fields": {
+      "car_model": 3,
+      "name": "White",
+      "hex_code": "#FFFFFF"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 9,
+    "fields": {
+      "car_model": 3,
+      "name": "Blue",
+      "hex_code": "#3C7599"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 10,
+    "fields": {
+      "car_model": 4,
+      "name": "Black",
+      "hex_code": "#000000"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 11,
+    "fields": {
+      "car_model": 4,
+      "name": "White",
+      "hex_code": "#FFFFFF"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 12,
+    "fields": {
+      "car_model": 4,
+      "name": "Blue",
+      "hex_code": "#3C7599"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 13,
+    "fields": {
+      "car_model": 5,
+      "name": "Black",
+      "hex_code": "#000000"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 14,
+    "fields": {
+      "car_model": 5,
+      "name": "White",
+      "hex_code": "#FFFFFF"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 15,
+    "fields": {
+      "car_model": 5,
+      "name": "Blue",
+      "hex_code": "#3C7599"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 16,
+    "fields": {
+      "car_model": 6,
+      "name": "Black",
+      "hex_code": "#000000"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 17,
+    "fields": {
+      "car_model": 6,
+      "name": "White",
+      "hex_code": "#FFFFFF"
+    }
+  },
+  {
+    "model": "main.color",
+    "pk": 18,
+    "fields": {
+      "car_model": 6,
+      "name": "Blue",
+      "hex_code": "#3C7599"
+    }
+  },
+
+  {
+    "model": "main.engine",
+    "pk": 1,
+    "fields": {
+      "car_model": 1,
+      "name": "2.0 TDI",
+      "types": "diesel",
+      "power": 190
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 2,
+    "fields": {
+      "car_model": 1,
+      "name": "1.5 TDI",
+      "types": "diesel",
+      "power": 150
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 3,
+    "fields": {
+      "car_model": 1,
+      "name": "2.0 TFSI",
+      "types": "gasoline",
+      "power": 220
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 4,
+    "fields": {
+      "car_model": 2,
+      "name": "2.0 TDI",
+      "types": "diesel",
+      "power": 190
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 5,
+    "fields": {
+      "car_model": 2,
+      "name": "1.5 TDI",
+      "types": "diesel",
+      "power": 150
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 6,
+    "fields": {
+      "car_model": 2,
+      "name": "1.0 TFSI",
+      "types": "gasoline",
+      "power": 110
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 7,
+    "fields": {
+      "car_model": 3,
+      "name": "Single Motor Electric",
+      "types": "electric",
+      "power": 250
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 8,
+    "fields": {
+      "car_model": 4,
+      "name": "2.0 TDI",
+      "types": "diesel",
+      "power": 190
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 9,
+    "fields": {
+      "car_model": 4,
+      "name": "1.5 TDI",
+      "types": "diesel",
+      "power": 150
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 10,
+    "fields": {
+      "car_model": 5,
+      "name": "1.0 TSI",
+      "types": "gasoline",
+      "power": 110
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 11,
+    "fields": {
+      "car_model": 5,
+      "name": "1.5 TSI",
+      "types": "gasoline",
+      "power": 130
+    }
+  },
+  {
+    "model": "main.engine",
+    "pk": 12,
+    "fields": {
+      "car_model": 6,
+      "name": "3.0 TDI",
+      "types": "diesel",
+      "power": 280
+    }
+  },
+
+  {
+    "model": "main.wheel",
+    "pk": 1,
+    "fields": {
+      "car_model": 1,
+      "size": 18,
+      "style": "Sport"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 2,
+    "fields": {
+      "car_model": 1,
+      "size": 19,
+      "style": "Luxury"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 3,
+    "fields": {
+      "car_model": 1,
+      "size": 20,
+      "style": "Off-Road"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 4,
+    "fields": {
+      "car_model": 2,
+      "size": 17,
+      "style": "Classic"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 5,
+    "fields": {
+      "car_model": 2,
+      "size": 18,
+      "style": "Performance"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 6,
+    "fields": {
+      "car_model": 2,
+      "size": 19,
+      "style": "Sport"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 7,
+    "fields": {
+      "car_model": 3,
+      "size": 18,
+      "style": "Sport"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 8,
+    "fields": {
+      "car_model": 3,
+      "size": 19,
+      "style": "Luxury"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 9,
+    "fields": {
+      "car_model": 3,
+      "size": 20,
+      "style": "Off-Road"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 10,
+    "fields": {
+      "car_model": 4,
+      "size": 17,
+      "style": "Classic"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 11,
+    "fields": {
+      "car_model": 4,
+      "size": 18,
+      "style": "Performance"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 12,
+    "fields": {
+      "car_model": 4,
+      "size": 19,
+      "style": "Sport"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 13,
+    "fields": {
+      "car_model": 5,
+      "size": 17,
+      "style": "Classic"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 14,
+    "fields": {
+      "car_model": 5,
+      "size": 18,
+      "style": "Performance"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 15,
+    "fields": {
+      "car_model": 5,
+      "size": 19,
+      "style": "Sport"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 16,
+    "fields": {
+      "car_model": 6,
+      "size": 17,
+      "style": "Classic"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 17,
+    "fields": {
+      "car_model": 6,
+      "size": 18,
+      "style": "Performance"
+    }
+  },
+  {
+    "model": "main.wheel",
+    "pk": 18,
+    "fields": {
+      "car_model": 6,
+      "size": 19,
+      "style": "Sport"
+    }
+  }
+]

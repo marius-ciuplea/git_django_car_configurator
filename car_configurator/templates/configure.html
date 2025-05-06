@@ -1,0 +1,26 @@
+{% extends "base.html" %}{% load static %} {% block content %}
+{% load humanize %}
+<link rel="stylesheet" href="{% static 'styles/configure.css' %}" />
+
+
+<h1>Choose a model to configure</h1>
+
+<div class="card-container">
+  {% for car in cars %}
+  <div class="car-card">
+    {% if car.image %}
+    <img src="{{ car.image.url }}" alt="{{ car.model_name }}" />
+    {% else %}
+    <img src="{% static 'images/default-car.jpg' %}" alt="Default car image" />
+    {% endif %}
+    <div class="car-card-content">
+      <h3>{{ car.company_name }} {{ car.model_name }}</h3>
+      <p>Choose now! Price starts at {{ car.base_price|floatformat:0|intcomma }} €</p>
+      <a href="{% url 'configure_car' car.id %}" class="configure-button"
+        >Configure</a
+      >
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

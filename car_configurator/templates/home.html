@@ -1,0 +1,71 @@
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<link rel="stylesheet" href="{% static 'styles/configure.css' %}" />
+
+
+{% if messages %}
+<div class="popup-container">
+  {% for message in messages %}
+    <div class="popup-message alert alert-{{ message.tags }}">
+      {{ message }}
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+
+
+<div class="carousel-container">
+  <div class="carousel-wrapper">
+    <div class="carousel-slide">
+      <img
+        src="../static/images/Tiguan/Albastru/img1-albastru.jpg"
+        alt="tiguan"
+      />
+    </div>
+    <div class="carousel-slide">
+      <img src="../static/images/Golf/White/1golf-ext-white.jpg" alt="golf" />
+    </div>
+    <div class="carousel-slide">
+      <img src="../static/images/ID7/Black/1id7-ext-black.jpg" alt="id7" />
+    </div>
+  </div>
+  <button class="prev">&#10094;</button>
+  <!-- Left arrow -->
+  <button class="next">&#10095;</button>
+  <!-- Right arrow -->
+</div>
+
+<div class="home-paragraph">
+  <span>
+    Descoperiți acum diversitatea gamei noastre de modele - de la mașini mici la
+    mașini spațioase de famile <br />
+    și SUV-uri electrice. La Volkswagen, veți găsi cu siguranță modelul potrivit
+    pentru dumneavoastră.
+  </span>
+</div>
+
+<div class="body-container">
+  <div class="card-container-home">
+    {% for car in cars %}
+    <div class="car-card ">
+      {% if car.image %}
+      <img src="{{ car.image.url }}" alt="{{ car.model_name }}" />
+      {% else %}
+      <img
+        src="{% static 'images/default-car.jpg' %}"
+        alt="Default car image"
+      />
+      {% endif %}
+      <div class="car-card-content">
+        <h3>{{ car.company_name }} {{ car.model_name }}</h3>
+        <p>Alege modelul potrivit pentru tine.</p>
+        <a href="{% url 'configure_car' car.id %}" class="configure-button"
+          >Configure</a
+        >
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% include "navbar.html" %} {% load static %} {% block content %}
+
+<!-- <div class="login-container">
+  <div class="login-card">
+
+    {% if user.is_authenticated %}
+      <h2>Welcome, {{ user.username }}!</h2>
+      <a href="{% url 'logout' %}" class="login-btn">🚪 Logout</a>
+
+    {% elif form_type == "login" %}
+      <h2>LOGIN</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="login-btn"><span>🔒</span> <span style=" transform: translateX(-150%) ; align-self: center;">Login</span>  </button>
+      </form>
+      <p class="signup-link">
+        Haven't signed up yet? <a href="{% url 'register' %}">Sign Up</a>
+      </p>
+
+    {% elif form_type == "register" %}
+      <h2>REGISTER</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="login-btn">
+          <span >📝</span>
+          <span style=" transform: translateX(-150%) ; align-self: center;">Register</span> 
+          </button>
+      </form>
+      <p class="signup-link">
+        Already have an account? <a href="{% url 'login' %}">Login here</a>
+      </p>
+
+    {% endif %}
+
+
+
+  </div>
+</div> -->
+
+<div class="login-container">
+  <div class="login-card">
+    <h2>{{ form_type|title }}</h2>
+
+    <form method="post">
+      {% csrf_token %} {% if form_type == 'register' %}
+      <!-- Username Field -->
+      <div>
+        <label for="id_username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="id_username"
+          value="{{ form.username.value|default_if_none:'' }}"
+          required
+          autofocus
+        />
+        {% if form.username.errors %}
+        <div>{{ form.username.errors|join:", " }}</div>
+        {% endif %}
+      </div>
+      <!-- Email Field -->
+      <div>
+        <label for="id_email">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="id_email"
+          value="{{ form.email.value|default_if_none:'' }}"
+          required
+        />
+        {% if form.email.errors %}
+        <div>{{ form.email.errors|join:", " }}</div>
+        {% endif %}
+      </div>
+      <!-- Password1 Field -->
+      <div>
+        <label for="id_password1">Password</label>
+        <div style="position: relative">
+          <input type="password" name="password1" id="id_password1" required />
+        </div>
+        {% if form.password1.errors %}
+        <div>{{ form.password1.errors|join:", " }}</div>
+        {% endif %}
+      </div>
+      <!-- Password2 Field -->
+      <div>
+        <label for="id_password2">Confirm Password</label>
+        <div style="position: relative">
+          <input type="password" name="password2" id="id_password2" required />
+        </div>
+        {% if form.password2.errors %}
+        <div>{{ form.password2.errors|join:", " }}</div>
+        {% endif %}
+      </div>
+      {% elif form_type == 'login' %}
+      <!-- Username Field -->
+      <div>
+        <label for="id_username">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="id_username"
+          value="{{ form.username.value|default_if_none:'' }}"
+          required
+          autofocus
+        />
+        {% if form.username.errors %}
+        <div>{{ form.username.errors|join:", " }}</div>
+        {% endif %}
+      </div>
+      <!-- Password Field -->
+      <div>
+        <label for="id_password">Password</label>
+        <div style="position: relative">
+          <input type="password" name="password" id="id_password" required />
+        </div>
+        {% if form.password.errors %}
+        <div>{{ form.password.errors|join:", " }}</div>
+        {% endif %}
+      </div>
+      {% endif %}
+      <div>
+        <button type="submit" class="login-btn">
+          {% if form_type == 'login' %} Log In {% else %} Register {% endif %}
+        </button>
+      </div>
+    </form>
+
+    <div class="login-card-footer">
+      {% if form_type == 'login' %}
+      <p>
+        Don't have an account?<br />
+        <a href="{% url 'register' %}">Register here.</a>
+      </p>
+      {% else %}
+      <p>
+        Already have an account?<br />
+        <a href="{% url 'login' %}">Log in here.</a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

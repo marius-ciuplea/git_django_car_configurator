@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<div id="page-content">
+  <div class="contact-page-wrapper">
+    <div class="contact-container">
+      <div class="contact-title"><h2>Contact Us</h2></div>
+
+      <div class="reason-contact">
+        <ul>
+          <p id="reason-contact-paragraph">Feel free to reach us</p>
+          <li>
+            <span class="valid-sign">&#10003;</span> You have questions about
+            our products
+          </li>
+          <li>
+            <span class="valid-sign">&#10003;</span> Need technical support
+          </li>
+          <li><span class="valid-sign">&#10003;</span> Have any feedback</li>
+          <li><span class="valid-sign">&#10003;</span> Have any suggestions</li>
+        </ul>
+
+        <div class="contact-paragraph">
+          <h3>Contact us today!</h3>
+          <p><strong>Phone:</strong> +1 (234) 567-890</p>
+          <p><strong>Email:</strong> support@example.com</p>
+          <p><strong>Address:</strong> 1234 Example St, City, Country</p>
+        </div>
+      </div>
+      <div class="contact-form-container">
+        <form method="POST" action="{% url 'contact_form' %}">
+          {% csrf_token %} {{ form.as_p }}
+          <div class="form-buttons">
+            <button type="reset" class="reset-btn">Clear</button>
+            <button type="submit" class="submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Success message container -->
+<div id="success-popup" class="success-popup hidden">
+  <p>Your message was successfully sent!</p>
+  <button
+    id="go-home-button"
+    class="go-home-button hidden"
+    onclick="window.location.href='/'"
+  >
+    Go to Home Page
+  </button>
+</div>
+<!-- Blocking layer -->
+<div id="overlay" class="hidden"></div>
+<script src="{% static 'js/contact_form.js' %}"></script>
+{% endblock %}

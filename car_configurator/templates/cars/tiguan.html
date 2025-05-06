@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Configure Your Car</title>
+    <link rel="stylesheet" href="{% static 'styles/configure.css' %}" />
+  </head>
+  <body class="configure-page">
+    <h2 class="configure-title">Configure Your Car</h2>
+
+    <div class="configure-card-container">
+      <!-- Card 1 -->
+      <div class="configure-card">
+        <img
+          src="../static/images/Tiguan/Alb/img1-alb.jpg"
+          alt="Tiguan White"
+        />
+        <h3>Volkswagen Tiguan</h3>
+        <p>Explore different configurations.</p>
+        <a href="{% url 'configure_car' 'Tiguan' %}" class="configure-button"
+          >Configure Tiguan</a
+        >
+      </div>
+
+      <!-- Card 2 -->
+      <div class="configure-card">
+        <img src="{% static 'images/golf/blue/foto.jpg' %}" alt="Golf Blue" />
+        <h3>Volkswagen Golf</h3>
+        <p>Customize your Golf model.</p>
+        <a href="#" class="configure-button">Configure</a>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="configure-card">
+        <img
+          src="{% static 'images/passat/black/foto.jpg' %}"
+          alt="Passat Black"
+        />
+        <h3>Volkswagen Passat</h3>
+        <p>Choose your perfect Passat.</p>
+        <a href="#" class="configure-button">Configure</a>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="configure-card">
+        <img src="{% static 'images/x5/white/foto.jpg' %}" alt="BMW X5 White" />
+        <h3>BMW X5</h3>
+        <p>Luxury meets performance.</p>
+        <a href="#" class="configure-button">Configure</a>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="configure-card">
+        <img
+          src="{% static 'images/mustang/red/foto.jpg' %}"
+          alt="Ford Mustang Red"
+        />
+        <h3>Ford Mustang</h3>
+        <p>Feel the power of the Mustang.</p>
+        <a href="#" class="configure-button">Configure</a>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="configure-card">
+        <img
+          src="{% static 'images/audi-a4/gray/foto.jpg' %}"
+          alt="Audi A4 Gray"
+        />
+        <h3>Audi A4</h3>
+        <p>Premium performance and design.</p>
+        <a href="#" class="configure-button">Configure</a>
+      </div>
+    </div>
+  </body>
+</html>

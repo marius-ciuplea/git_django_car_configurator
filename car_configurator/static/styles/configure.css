@@ -1,0 +1,150 @@
+:root {
+  --grey: rgb(241, 239, 236);
+  --secondGrey: rgb(212, 201, 190);
+  --navy: rgb(18, 52, 88);
+  --Black: rgb(3, 3, 3);
+}
+
+body {
+  background-color: var(--grey);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header */
+h1 {
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--navy);
+}
+
+/* Card container */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  padding: 1rem;
+  min-height: 80vh;
+  margin-bottom: 30px;
+}
+
+/* Individual car card */
+.car-card {
+  background-color: white;
+  width: calc(33.33% - 1rem);  /* 3 cards per row, minus the gap */
+  min-width: 320px;
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  transition: transform 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.car-card:hover {
+  transform: translateY(-5px);
+}
+
+.car-card img {
+  flex: 1 1 auto;
+  width: 100%;
+  object-fit: cover;
+  height: 220px;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+
+.car-card-content {
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Car title */
+.car-card h3 {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+}
+
+/* Description text */
+.car-card p {
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Button */
+.configure-button {
+  margin-top: auto;
+  margin-left: auto;
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  background-color: var(--navy);
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.configure-button:hover {
+  background-color: rgba(15, 40, 70, 1);
+}
+
+/* configure_car */
+.configurator-card {
+  background-color: var(--grey);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  width: 90%;
+}
+
+.configurator-card h2 {
+  color: var(--navy);
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.submit-button {
+  background-color: var(--navy);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0f2846;
+}
