@@ -1,5 +1,5 @@
 {% extends "base.html" %}{% load static %} {% block content %}
-{% load humanize %}
+{% load humanize %} {% load l10n %}
 <link rel="stylesheet" href="{% static 'styles/configure.css' %}" />
 
 
@@ -15,7 +15,9 @@
     {% endif %}
     <div class="car-card-content">
       <h3>{{ car.company_name }} {{ car.model_name }}</h3>
-      <p>Choose now! Price starts at {{ car.base_price|floatformat:0|intcomma }} €</p>
+      {% localize on %}
+      <p>Choose now! Price starts at {{ car.base_price }} €</p>
+      {% endlocalize %}
       <a href="{% url 'configure_car' car.id %}" class="configure-button"
         >Configure</a
       >

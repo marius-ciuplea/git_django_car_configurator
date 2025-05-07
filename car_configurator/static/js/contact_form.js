@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const contactLinks = document.querySelectorAll('.open-contact-form');
   const contactFormContainer = document.querySelector('.contact-form-container');
   const pageContent = document.getElementById('page-content');
   const overlay = document.getElementById('overlay');
@@ -7,14 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const successPopup = document.getElementById('success-popup');
   const homeButton = document.getElementById('go-home-button');
 
-  if (contactLinks && contactFormContainer) {
-    contactLinks.forEach(contactLink => {
-      contactLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        contactFormContainer.classList.remove('hidden');
-      });
-    });
-  }
 
   if (form) {
     form.addEventListener('submit', function (e) {

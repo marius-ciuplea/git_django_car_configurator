@@ -58,11 +58,11 @@ document.addEventListener("DOMContentLoaded", function () {
   
  
   // Reusable cancel button functionality for modals
-  if (modalCancel) {
-    modalCancel.addEventListener("click", function () {
-      closeModal(); // Close the modal if cancel button is clicked
-    });
-  }
+  // if (modalCancel) {
+  //   modalCancel.addEventListener("click", function () {
+  //     closeModal(); // Close the modal if cancel button is clicked
+  //   });
+  // }
 });
 
 

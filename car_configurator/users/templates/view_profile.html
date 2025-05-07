@@ -17,8 +17,9 @@
 
   <!-- Main content aligned to the left -->
   <div class="profile-main-content">
+    {% if not edit_mode %}
     <div class="profile-left">
-      {% if not edit_mode %}
+      
       <!-- Profile details section -->
       <div class="profile-details">
         <div class="profile-item">
@@ -33,7 +34,7 @@
           <p>{{ profile.user.email }}</p>
         </div>
 
-        <div class="action-button edit-profile">
+        <div class="action-button">
           <a href="{% url 'view_profile' %}?edit=true">Edit Profile</a>
         </div>
       </div>
@@ -79,23 +80,17 @@
         <div class="input-field">{{ user_form.email }}</div>
       </div>
 
-      <div class="profile-upload-picture-section">
-        {% if profile.profile_picture %}
-        <img
-          src="{{ profile.profile_picture.url }}"
-          alt="Current Profile Picture"
-          class="current-profile-picture"
-        /><br />
-        {% endif %}
+      <div class="action-button">
+        
 
-        <label for="id_profile_picture">Choose new picture:</label><br />
+        <label for="id_profile_picture" >Choose new photo</label>
         <input type="file" name="profile_picture" id="id_profile_picture" class="custom-file-input" />
-        <br /><br />
+        
       </div>
 
       <!-- {{ profile_form.profile_picture }} -->
 
-      <div class="action-button password_change">
+      <div class="action-button">
         <a href="{% url 'password_change' %}">Change Password</a>
       </div>
 

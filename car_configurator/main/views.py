@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 from .models import CarModel, Engine, Color, Wheel
@@ -16,6 +17,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cars'] = CarModel.objects.all()[:3]
+        context['user'] = self.request.user 
         return context
     
 
@@ -38,7 +40,7 @@ class ConfigureListView(TemplateView):
         return context
 
 # Configure cars 
-class ConfigureCarModelView(View):
+class ConfigureCarModelView(LoginRequiredMixin, View):
     def get(self, request, car_id):
         car = get_object_or_404(CarModel, id=car_id)
         form = ConfigurationForm(car_model=car)  # Pass the car model to the form

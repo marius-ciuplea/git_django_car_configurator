@@ -4,46 +4,75 @@
 <nav class="navbar">
   <div class="logo">
     <a href="{% url 'home' %}">
-      <img src="{% static 'images/logo1.png' %}" alt="Logo" height="40" />
+      <img src="{% static 'images/logo1.png' %}" alt="Logo" />
     </a>
   </div>
 
   {% with request.resolver_match.url_name as current_url %}
   <ul class="nav-links">
-    <li><a href="{% url 'home' %}" class="{% if current_url == 'home' %}active{% endif %}">Home</a></li>
-    <li><a href="{% url 'configure_car_list' %}" class="{% if current_url == 'configure_car_list' %}active{% endif %}">Models</a></li>
-    <li><a href="{% url 'contact_form' %}" class="open-contact-form {% if current_url == 'contact_form' %}active{% endif %}">Contact</a></li>
+    <li>
+      <a
+        href="{% url 'home' %}"
+        class="{% if current_url == 'home' %}active{% endif %}"
+        >Home</a
+      >
+    </li>
+    <li>
+      <a
+        href="{% url 'configure_car_list' %}"
+        class="{% if current_url == 'configure_car_list' %}active{% endif %}"
+        >Models</a
+      >
+    </li>
+    <li>
+      <a
+        href="{% url 'contact_form' %}"
+        class="{% if current_url == 'contact_form' %}active{% endif %}"
+        >Contact</a
+      >
+    </li>
 
     {% if user.is_authenticated %}
     <li class="user-dropdown">
+      {% if user.profile.profile_picture %}
+      <img
+        src="{{ user.profile.profile_picture.url }}"
+        alt="User Profile"
+        class="profile-pic"
+        id="userDropdownToggle"
+      />
+      {% else %}
       <img
         src="{% static 'images/profile.png' %}"
         alt="User Profile"
         class="profile-pic"
-        width="32px"
-        height="32px"
+        width="38px"
+        height="38px"
         id="userDropdownToggle"
       />
+      {% endif %}
+
       <ul class="dropdown-menu" id="userDropdownMenu">
         <li><a href="{% url 'view_profile' %}">Profile</a></li>
         <li><a href="{% url 'logout' %}">Logout</a></li>
       </ul>
     </li>
     {% else %}
-    <div class="container-profile-login">
-      <a href="{% url 'login' %}">
-        <li class="user-login">
-          <p>Login</p>
-          <img
-            src="{% static 'images/default_profile.png' %}"
-            alt="Guest Profile"
-            class="profile-pic"
-            width="30px"
-            height="30px"
-          />
-        </li>
-      </a>
-    </div>
+
+    <li><a href="{% url 'login' %}">Login </a></li>
+
+    <li class="li-profile-pic">
+      <a href="{% url 'login' %}"
+        ><img
+          src="{% static 'images/default_profile.png' %}"
+          alt="Guest Profile"
+          class="profile-pic"
+          width="34px"
+          height="34px"
+      /></a>
+    </li>
+
+
     {% endif %}
   </ul>
   {% endwith %}

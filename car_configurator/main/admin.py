@@ -8,21 +8,21 @@ from .models import CarModel, Engine, Color, Wheel, Configuration
 # Inline models to allow adding options directly inside a car model
 class EngineInline(admin.TabularInline):
     model = Engine
-    extra = 1  # Number of blank rows for adding new items
+    extra = 0  # Number of blank rows for adding new items
 
 class ColorInline(admin.TabularInline):
     model = Color
-    extra = 1
+    extra = 0
 
 class WheelInline(admin.TabularInline):
     model = Wheel
-    extra = 1
+    extra = 0
 
 # Admin for managing car models and linking them with options
 @admin.register(CarModel)
 class CarModelAdmin(admin.ModelAdmin):
-    list_display = ('company_name', 'model_name', 'created_by')  # Display fields
-    search_fields = ('company_name', 'model_name', 'created_by__username')  # Enable search
+    list_display = ('company_name', 'model_name')  # Display fields
+    search_fields = ('company_name', 'model_name')  # Enable search
     inlines = [EngineInline, ColorInline, WheelInline]  # Allow adding options inside the car model
     actions = ['assign_car_images', 'remove_car_images']  # Acțiune custom în admin
 
@@ -79,7 +79,7 @@ class CarModelAdmin(admin.ModelAdmin):
 
 
 
-# Registering predefined options separately
+# # Registering predefined options separately
 # @admin.register(Engine)
 # class EngineAdmin(admin.ModelAdmin):
 #     list_display = ('name', 'types', 'power', 'car_model')  # Show car model
