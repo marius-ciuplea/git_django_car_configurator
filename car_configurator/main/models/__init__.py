@@ -1,1 +1,1 @@
-from .car_models import CarModel, Engine, Color, Wheel, Configuration
+from .car_models import CarModel, Engine, Color, Wheel, Configuration, ColorImage

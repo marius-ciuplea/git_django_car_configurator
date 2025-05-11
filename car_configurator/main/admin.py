@@ -2,8 +2,8 @@ import os
 from django.conf import settings
 from django.core.files import File
 from django.contrib import admin
-
-from .models import CarModel, Engine, Color, Wheel, Configuration
+from django.utils.html import format_html
+from .models import CarModel, Engine, Color, Wheel, Configuration, ColorImage
 
 # Inline models to allow adding options directly inside a car model
 class EngineInline(admin.TabularInline):
@@ -17,6 +17,24 @@ class ColorInline(admin.TabularInline):
 class WheelInline(admin.TabularInline):
     model = Wheel
     extra = 0
+
+
+
+
+class ColorImageInline(admin.TabularInline):
+    model = ColorImage
+    extra = 1
+    readonly_fields = ['preview']
+
+    def preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="height: 100px;" />', obj.image.url)
+        return "No image"
+
+@admin.register(Color)
+class ColorAdmin(admin.ModelAdmin):
+    inlines = [ColorImageInline]
+
 
 # Admin for managing car models and linking them with options
 @admin.register(CarModel)
@@ -99,6 +117,11 @@ class CarModelAdmin(admin.ModelAdmin):
 # Admin for viewing and managing user configurations
 @admin.register(Configuration)
 class ConfigurationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'car_model', 'engine', 'color', 'wheel', 'created_at')
+    list_display = ('user', 'car_model', 'engine', 'color', 'wheel', 'created_at', 'get_total_price')
     search_fields = ('user__username', 'car_model__model_name')
     list_filter = ('car_model', 'engine', 'color', 'wheel')
+    readonly_fields = ('get_total_price',)  # Optional: show in detail view
+
+    def get_total_price(self, obj):
+        return f"{obj.total_price():,.2f} €"
+    get_total_price.short_description = 'Total Price'

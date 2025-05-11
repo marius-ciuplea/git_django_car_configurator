@@ -32,6 +32,13 @@ class Color(models.Model):
     
     def __str__(self):
         return self.name
+    
+class ColorImage(models.Model):
+    color = models.ForeignKey(Color, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='color_gallery/')
+    
+    def __str__(self):
+        return f"Image for {self.color}"
 
 class Wheel(models.Model):
     car_model = models.ForeignKey(CarModel, related_name='wheels', on_delete=models.CASCADE)  # Now linked to a car model

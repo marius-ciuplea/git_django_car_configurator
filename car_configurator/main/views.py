@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import CarModel, Engine, Color, Wheel
 from .forms import ConfigurationForm, CustomUserCreationForm
 
+
 class HomeView(TemplateView):
     template_name = 'home.html'
     
@@ -63,6 +64,7 @@ class ConfigureCarModelView(LoginRequiredMixin, View):
         if form.is_valid():
             configuration = form.save(commit=False)
             configuration.car_model = car
+            configuration.user = request.user
             configuration.save()
             return redirect('home')  # Redirect after saving the configuration
 
@@ -200,8 +202,8 @@ class CustomLogoutView(View):
 
 
 def configure_car(request):
-    
-    return render(request, 'configure_car.html')
+    colors = Color.objects.all()
+    return render(request, 'configure_car.html', {'colors': colors})
 
 
 def about_us(request):
