@@ -2,7 +2,7 @@
 from django.urls import path
 from .views import view_profile, contact_view, delete_message_ajax
 from django.contrib.auth import views as auth_views
-
+from .views import LoginView, RegisterView, CustomLogoutView
 
 urlpatterns = [
     path('profile/', view_profile, name='view_profile'), 
@@ -16,5 +16,10 @@ urlpatterns = [
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(
         template_name='password_change_done.html'
     ), name='password_change_done'),
+    
+    
+    path('login/', LoginView.as_view(), name='login'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
     
 ]

@@ -1,15 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
-from django.contrib.auth.forms import  AuthenticationForm
-from django.contrib.auth import login, logout
+from django.urls import reverse_lazy
+from .models import CarModel, Engine, Color, Wheel, Configuration
+from .forms import ConfigurationForm
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 
-
-from .models import CarModel, Engine, Color, Wheel
-from .forms import ConfigurationForm, CustomUserCreationForm
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 
 class HomeView(TemplateView):
@@ -30,183 +29,119 @@ class ConfigureView(TemplateView):
         context['cars'] = CarModel.objects.all()
         return context
 
-# Configure view
-
-class ConfigureListView(TemplateView):
-    template_name = 'configure.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cars'] = CarModel.objects.all()
-        return context
 
 # Configure cars 
-class ConfigureCarModelView(LoginRequiredMixin, View):
+class ConfigureCarModelView(View):
     def get(self, request, car_id):
         car = get_object_or_404(CarModel, id=car_id)
-        form = ConfigurationForm(car_model=car)  # Pass the car model to the form
-        colors = Color.objects.filter(car_model=car)
-        engines = Engine.objects.filter(car_model=car)
-        wheels = Wheel.objects.filter(car_model=car)
+        config = Configuration.objects.filter(car_model=car, user=request.user).last()
+        
+        if config:
+            form = ConfigurationForm(instance=config, car_model=car)
+        
+        else:
+            form = ConfigurationForm(car_model=car)
+            
 
         return render(request, 'configure_car.html', {
             'car': car,
             'form': form,
-            'colors': colors,
-            'engines': engines,
-            'wheels': wheels
+            'colors': Color.objects.filter(car_model=car),
+            'engines': Engine.objects.filter(car_model=car),
+            'wheels': Wheel.objects.filter(car_model=car),
+            'existing_config_id': config.id if config else None
         })
 
     def post(self, request, car_id):
         car = get_object_or_404(CarModel, id=car_id)
-        form = ConfigurationForm(request.POST, car_model=car)  # Pass the car model to filter options
+        config_id = request.POST.get("config_id")
+        action = request.POST.get("action")
+        
+        if config_id:
+            #Update
+            configuration = get_object_or_404(Configuration, id=config_id, user=request.user)
+            form = ConfigurationForm(request.POST, instance=configuration, car_model=car)
+        
+        else:
+            # Create
+            form = ConfigurationForm(request.POST, car_model=car)  
+            
 
         if form.is_valid():
             configuration = form.save(commit=False)
             configuration.car_model = car
             configuration.user = request.user
+            configuration.saved_config = True
+            
+            
+            if action == "send_offer":
+                configuration.offered_config = True
+                messages.success(request, "The offer has been sent successfully!")
+                
+            elif action == "save":
+                configuration.offered_config = False
+                messages.success(request, "Your configuration has been saved!")
+                
             configuration.save()
-            return redirect('home')  # Redirect after saving the configuration
+            return redirect('view_profile')  # Redirect after saving the configuration
 
         return render(request, 'configure_car.html', {
             'car': car,
-            'form': form
-        })
-
-
-
-
-# # login view
-
-# class CustomLoginView(LoginView):
-#     template_name = 'login.html'
-
-#     def form_invalid(self, form):
-#         messages.error(self.request, 'Invalid credentials')
-#         return super().form_invalid(form)
-
-
-class LoginView(View):
-    template_name = 'auth.html'
-
-    def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('home')
-        form = AuthenticationForm()
-        return render(request, self.template_name, {
             'form': form,
-            'form_type': 'login'
+            'colors': Color.objects.filter(car_model=car),
+            'engines': Engine.objects.filter(car_model=car),
+            'wheels': Wheel.objects.filter(car_model=car),
+            'config_id': config_id
         })
-
-    def post(self, request):
-        if request.user.is_authenticated:
-            return redirect('home')
-        form = AuthenticationForm(request, data=request.POST)
         
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')
-        else:
-               # Remove the default error message
-            form.errors.clear()
-             
-            # Custom error message for invalid login attempt
-            messages.error(request, 'Please enter a correct username and password. Note that both fields may be case-sensitive.')
-            
-        return render(request, self.template_name, {
-            'form': form,
-            'form_type': 'login'
-        })
 
 
-
-
-
-# register view
-
-# class RegisterView(View):
-#     template_name = 'register.html'
-
-#     def get(self, request):
-#         if request.user.is_authenticated:
-#             return redirect('home')
-#         form = UserCreationForm()
-#         return render(request, self.template_name, {'form': form})
-
-#     def post(self, request):
-#         if request.user.is_authenticated:
-#             return redirect('home')
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save(commit=False)
-#             user.username = user.username.lower()
-#             user.save()
-#             login(request, user)
-#             return redirect('home')
-#         else:
-#             messages.error(request, 'Registration failed.')
-#         return render(request, self.template_name, {'form': form})
-
-
-
-class RegisterView(View):
-    template_name = 'auth.html'
-
-    def get(self, request):
-        if request.user.is_authenticated:
-            return redirect('home')
-        form = CustomUserCreationForm()
-        return render(request, self.template_name, {
-            'form': form,
-            'form_type': 'register'
-        })
-
-    def post(self, request):
-        if request.user.is_authenticated:
-            return redirect('home')
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            login(request, user)
-            return redirect('home')
-        messages.error(request, 'Registration failed.')
-        return render(request, self.template_name, {
-            'form': form,
-            'form_type': 'register'
-        })
-
-
-
-
-
-# class CustomLogoutView(View):
-#     def get(self, request):
-#         logout(request)
-#         return redirect('home')
-    
-    
-    
-    
-class CustomLogoutView(View):
-    def get(self, request):
-        if request.user.is_authenticated:
-            logout(request)
-            messages.success(request, "You have been logged out successfully.")
-        return redirect('home')
-    
-    
-
-
-
-def configure_car(request):
-    colors = Color.objects.all()
-    return render(request, 'configure_car.html', {'colors': colors})
+# def configure_car(request):
+#     colors = Color.objects.all()
+#     return render(request, 'configure_car.html', {'colors': colors})
 
 
 def about_us(request):
     return render(request, 'about_us.html')
 
 
+def update_config(request, config_id):
+    config = get_object_or_404(Configuration, id=config_id, user=request.user)
+    car_model = config.car_model
+    
+    if request.method == 'POST':
+        form = ConfigurationForm(request.POST, instance=config, car_model=car_model)
+        if form.is_valid():
+            form.save()
+            return redirect('view_profile')
+    else:
+        form = ConfigurationForm(instance=config, car_model=car_model)
+    
+    return render(request, 'update_config.html', {'form':form, 'config':config})
+
+
+@require_POST
+@login_required
+def delete_configuration_ajax(request):
+    config_id = request.POST.get('config_id')
+    config = get_object_or_404(Configuration, id=config_id, user=request.user)
+    config.delete()
+    return JsonResponse({'success': True})
+
+
+
+@login_required
+@require_POST
+def send_offer_ajax(request):
+    config_id = request.POST.get('config_id')
+
+    if not config_id:
+        return JsonResponse({'success': False, 'error': 'Missing config ID'})
+
+    try:
+        config = Configuration.objects.get(id=config_id, user=request.user)
+        config.offered_config = True
+        config.save()
+        return JsonResponse({'success': True})
+    except Configuration.DoesNotExist:
+        return JsonResponse({'success': False, 'error': 'Configuration not found'})

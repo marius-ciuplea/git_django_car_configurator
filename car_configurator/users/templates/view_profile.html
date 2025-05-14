@@ -1,9 +1,12 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 <link rel="stylesheet" href="{% static 'styles/profile_style.css' %}" />
 
-<!-- Profile section with picture and title together -->
+
 
 <div class="profile-container">
+
+
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   <div class="profile-name">
     {% if profile.profile_picture %}
     <img
@@ -15,9 +18,10 @@
     <h1>{{ profile.user.username|title }}'s Profile</h1>
   </div>
 
-  <!-- Main content aligned to the left -->
+
   <div class="profile-main-content">
     {% if not edit_mode %}
+
     <div class="profile-left">
       
       <!-- Profile details section -->
@@ -40,31 +44,114 @@
       </div>
 
       <!-- User messages section -->
-    </div>
-    <div class="messages-container">
-      <h2>Your Messages</h2>
-      {% if user_messages %}
-      <div class="messages-list">
-        {% for msg in user_messages %}
-        <div class="message-card" id="message-{{ msg.id }}">
-          <p class="message-date">
-            <strong>Sent:</strong> {{ msg.created_at|date:"Y-m-d H:i" }}
-          </p>
-          <p class="message-content">{{ msg.message|linebreaksbr }}</p>
-          <input
-            type="hidden"
-            id="csrf-token"
-            name="csrfmiddlewaretoken"
-            value="{{ csrf_token }}"
-          />
-          <button class="delete-btn" data-id="{{ msg.id }}">Delete</button>
+
+      <div class="messages-container">
+        <h2>Your Messages</h2>
+        {% if user_messages %}
+        <div class="messages-list">
+          {% for msg in user_messages %}
+          <div class="message-card" id="message-{{ msg.id }}">
+            <p class="message-date">
+              <strong>Sent:</strong> {{ msg.created_at|date:"Y-m-d H:i" }}
+            </p>
+            <p class="message-content">{{ msg.message|linebreaksbr }}</p>
+            <!-- <input
+              type="hidden"
+              id="csrf-token"
+              name="csrfmiddlewaretoken"
+              value="{{ csrf_token }}"
+            /> -->
+            <button class="delete-btn" data-id="{{ msg.id }}">Delete</button>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
+        {% else %}
+        <p class="no-messages">You haven’t sent any messages yet.</p>
+        {% endif %}
       </div>
-      {% else %}
-      <p class="no-messages">You haven’t sent any messages yet.</p>
-      {% endif %}
+
+
+
+<!-- ------------------------------offeres--------------------------------- -->
+
+      <div class="profile-offeres">
+    
+        <h2>Offered Configurations</h2>
+
+        {% for config in user_config %}
+          {% if config.offered_config %}
+
+        <div class="offer-card">
+
+          <h4>{{ config.car_model.model_name }} (Offered)</h4>
+          <p>
+            <strong>Engine:</strong> {{ config.engine.name }} - {{ config.engine.price }} €
+          </p>
+          <p>
+            <strong>Color:</strong> {{ config.color.name }} - {{ config.color.price }} €
+          </p>
+          <p>
+            <strong>Wheel:</strong> {{ config.wheel.name }} - {{ config.wheel.price }} €
+          </p>
+          <p><strong>Total Price:</strong> {{ config.total_price }} €</p>
+          <p><em>Created at: {{ config.created_at|date:"d M Y, H:i" }}</em></p>
+          
+        </div>
+
+          {% endif %}
+        {% endfor %}
+    
+      </div>
+
     </div>
+
+
+{% comment %} ---------------------------------------------------------------------------------------------------------------------------------------------- {% endcomment %}
+
+
+  <div class="profile-configs">
+      
+    <h2>Saved Configurations</h2>
+
+      {% for config in user_config %} 
+        {% if not config.offered_config %}
+
+          <div class="saved-config">
+            <div class="saved-config-card">
+              <h4>{{ config.car_model.model_name }}</h4>
+              <hr />
+              <p>
+                <strong>Engine:</strong> {{ config.engine.name }} - {{config.engine.price }} €
+              </p>
+              <p>
+                <strong>Color:</strong> {{ config.color.name }} - {{config.color.price }} €
+              </p>
+              <p>
+                <strong>Wheel:</strong> {{ config.wheel.name }} - {{config.wheel.price }} €
+              </p>
+              <p><strong>Total Price:</strong> {{ config.total_price }} €</p>
+              <p><em>Created at: {{ config.created_at|date:"d M Y, H:i" }}</em></p>
+              <div class="saved-config-buttons" id="config-{{ config.id }}">
+                <a href="{% url 'configure_car' config.car_model.id  %}" class="saved-update-btn">Update</a>
+                <a href="#" class="saved-delete-btn" data-id="{{ config.id }}">Delete</a>
+                <a href="#" class="saved-send-btn" data-id="{{ config.id }}">Send Offer</a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+       {% empty %}
+      <p>You have no saved configurations yet.</p>
+
+      {% endfor %}
+
+
+</div>
+
+
+
+{% comment %} ------------------------------------------------------------------------------------------------------------------------------------------------------       {% endcomment %}
+    
+
     {% else %}
     <!-- Edit Profile Form -->
     <form method="post" enctype="multipart/form-data" class="profile-form">
@@ -81,11 +168,13 @@
       </div>
 
       <div class="action-button">
-        
-
-        <label for="id_profile_picture" >Choose new photo</label>
-        <input type="file" name="profile_picture" id="id_profile_picture" class="custom-file-input" />
-        
+        <label for="id_profile_picture">Choose new photo</label>
+        <input
+          type="file"
+          name="profile_picture"
+          id="id_profile_picture"
+          class="custom-file-input"
+        />
       </div>
 
       <!-- {{ profile_form.profile_picture }} -->
@@ -114,7 +203,9 @@
 </div>
 
 <script>
-  const deleteUrl = "{% url 'delete_message_ajax' %}";
+  const deleteMessageUrl = "{% url 'delete_message_ajax' %}";
+  const deleteConfigUrl = "{% url 'delete_configuration_ajax' %}";
+  const sendOfferUrl = "{% url 'send_offer_ajax' %}";
 </script>
 <!-- JavaScript to handle message deletion -->
 <script src="{% static 'js/profile.js' %}"></script>

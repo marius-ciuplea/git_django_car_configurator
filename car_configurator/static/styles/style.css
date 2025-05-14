@@ -18,24 +18,21 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
-
 }
+
 * p , li{
   font-size: 1.2rem;
 }
 
-
-a {
+* a {
   text-decoration: none;
 }
 
-/* p,
-span {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 1.5rem;
-} */
 
-/* Navbar styling */
+
+
+
+/*---------------------- Navbar styling ---------------------*/
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -45,7 +42,7 @@ span {
   top: 0;
   padding: 20px 20px;
   z-index: 10;
-  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for background-color and shadow */
+  transition: background-color 0.3s, box-shadow 0.3s; 
 }
 
 /* Navbar background when scrolled */
@@ -68,7 +65,6 @@ span {
 
 }
 
-
 .nav-links {
   display: flex;
   list-style-type: none;
@@ -85,12 +81,11 @@ span {
   transition: background-color 0.3s, color 0.3s; 
 }
 
-/* Links color when navbar is scrolled */
 .navbar.scrolled .nav-links a {
   color: white; 
 }
 
-/* Link hover effect */
+
 .nav-links a:hover {
   color: var(--navy);
 }
@@ -104,7 +99,6 @@ span {
   background-color: #e8e8e8;
 }
 
-
 .contact_page-line {
   width: 100%;
   border: 1px solid #ccc; /* Light gray line */
@@ -112,7 +106,7 @@ span {
 
 
 
-/* User dropdown */
+/* ----------------------User dropdown-------------------- */
 
 .user-dropdown {
   position: relative;
@@ -157,7 +151,6 @@ span {
 
 .dropdown-menu li a {
   display: block;
-  /* padding: 8px 16px; */
   text-decoration: none;
   text-align: left;
   color: rgba(8, 31, 55, 0.8);
@@ -168,28 +161,13 @@ span {
   color: var(--navy);
 }
 
-/* User login */
+/*--------------------- User login -------------------------*/
 
 .container-profile-login {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-
-/* .container-profile-login a:hover {
-  color: var(--navy);
-  background-color: transparent;
-}
-
-.container-profile-login a li p {
-  margin: 0 9px;
-  padding: 0;
-}
-
-.container-profile-login a {
-  margin: 0;
-  padding: 0;
-} */
 
 .user-login {
   width: 100px;
@@ -204,26 +182,20 @@ span {
   height: 38px;
 }
 
-
-
-
 .login-card-footer a,
 .login-card-footer p {
   color: white;
   font-size: 1.2rem;
-  
 }
 
 .login-card-footer p{
   padding: 1rem;
 }
 
-
 .login-card-footer a{
   transition: transform 0.4s cubic-bezier(0.22, 1, 1, 1);
   
 }
-
 
 .login-card-footer p a:hover {
   display: block;
@@ -231,13 +203,13 @@ span {
   color: var(--blue-1);
 }
 
-/* base.html */
+/*----------------------- base.html --------------------------*/
 
 h1 {
   padding: 20px;
 }
 
-/* Carousel style */
+/*------------------- Carousel style ----------------------------*/
 
 .carousel-container {
   width: 100%;
@@ -261,7 +233,6 @@ h1 {
   width: 100%;
 }
 
-/* Style for arrows */
 button.prev,
 button.next {
   position: absolute;
@@ -306,7 +277,7 @@ button.next:hover {
   margin: 0 auto;
 }
 
-/* Cards Home */
+/*--------------------- Cards Home --------------------*/
 
 .body-container {
   height: 80vh;
@@ -327,130 +298,7 @@ button.next:hover {
 }
 
 
-/* Style for the footer */
-.footer {
-  color: white;
-  padding: 40px 0;
-  text-align: left;
-  background-color: var(--navy);
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap; 
-  padding: 20px;
-}
-
-.footer-column {
-  width: 22%; 
-  margin-bottom: 20px;
-}
-
-.footer-column h4 {
-  color: white;
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-}
-
-.footer-column ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.footer-column ul li {
-  margin-bottom: 8px;
-}
-
-.footer-column ul li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1.2rem;
-  transition: color 0.3s ease;
-}
-
-.footer-column ul li a:hover {
-  color: var(--blue-1);
-}
-
-.footer-dropdown {
-  margin-bottom: 10px;
-}
-
-.footer-paragraph {
-  color: #444;
-  transition: all 0.3s ease;
-}
-
-/* Style for social media icons */
-.social-icon {
-  display: inline-block;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-  line-height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-  transition: 0.3s ease, color 0.3s ease;
-}
-
-
-.social-icon i {
-  font-size: 20px;
-}
-
-.social-links {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.social-links li {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-/* Responsiveness for small screens */
-@media (max-width: 768px) {
-  button.prev,
-  button.next {
-    padding: 8px 10px;
-    font-size: 20px;
-  }
-
-  .carousel-container {
-    height: 400px;
-  }
-
-  .card-container {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 150px;
-  }
-
-  .card {
-    width: 90%;
-    margin-bottom: 20px;
-  }
-
-  button.prev,
-  button.next {
-    display: none;
-  }
-
-  footer {
-    margin-top: 150px;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-column {
-    width: 100%;
-  }
-}
-
-/* login */
+/*--------------------- login/register -----------------------*/
 
 .login-container {
   display: flex;
@@ -541,6 +389,8 @@ button.next:hover {
   color: white;
 }
 
+/*------------------- about us ------------------------*/
+
 .about_us_container {
   width: 100%;
   max-width: 1275px;
@@ -583,27 +433,23 @@ h2 {
   margin: 10px 0;
 }
 
-/* Contact form container */
+/*-------------------- Contact form container ----------------------*/
 
 body.contact-page {
-  /* background-image: url('../images/bg-contact-us.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat; */
   background-color: var(--grey);
 }
 
 .contact-container {
   width: 100%;
   max-width: 1275px;
-  margin: 0 auto; /* center horizontally */
+  margin: 0 auto; 
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
   padding: 20px;
   margin: 30px 0;
-  flex-wrap: wrap; /* so it adapts on smaller screens */
+  flex-wrap: wrap;
   box-sizing: border-box;
   background-color: var(--grey);
 }
@@ -650,8 +496,6 @@ h3 {
   font-size: 1.4rem;
 }
 
-/* Heading Style */
-
 .contact-title {
   width: 100%;
   text-align: center;
@@ -669,7 +513,6 @@ h3 {
   padding: 4px 0;
 }
 
-/* Basic styling for form fields */
 .contact-form-container input,
 .contact-form-container textarea {
   width: 100%;
@@ -682,7 +525,6 @@ h3 {
   border: none;
 }
 
-
 .contact-form-container input:focus,
 .contact-form-container textarea:focus {
 
@@ -691,15 +533,10 @@ h3 {
   box-shadow: 0 0 10px var(--blue-3);
 }
 
-
 .contact-form-container textarea {
   resize: vertical;
   min-height: 120px;
 }
-
-
-
-/* Button Styling */
 
 .form-buttons {
   display: flex;
@@ -725,7 +562,7 @@ h3 {
 }
 
 .contact-page-wrapper {
-  min-height: calc(100vh - 100px); /* adjust for navbar/footer */
+  min-height: calc(100vh - 100px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -784,8 +621,8 @@ h3 {
 /* Blur effect when form submitted */
 .blur {
   filter: blur(5px);
-  pointer-events: none; /* prevent clicks */
-  user-select: none; /* prevent text selection */
+  pointer-events: none; 
+  user-select: none;
 }
 
 /* Full-page transparent overlay */
@@ -795,7 +632,7 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* semi-transparent dark background */
+  background: rgba(0, 0, 0, 0.5); 
   z-index: 9998; /* under the success-popup (9999) */
 }
 
@@ -811,8 +648,7 @@ h3 {
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-
-  /* Style */
+ 
   background-color: #d1e7dd;
   color: #0f5132;
   border: 1px solid #badbcc;
@@ -821,4 +657,91 @@ h3 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 16px;
   text-align: center;
+}
+
+
+
+
+/* -------------------Style for the footer --------------------*/
+.footer {
+  color: white;
+  padding: 40px 0;
+  text-align: left;
+  background-color: var(--navy);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; 
+  padding: 20px;
+}
+
+.footer-column {
+  width: 22%; 
+  margin-bottom: 20px;
+}
+
+.footer-column h4 {
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: var(--blue-1);
+}
+
+.footer-dropdown {
+  margin-bottom: 10px;
+}
+
+.footer-paragraph {
+  color: #444;
+  transition: all 0.3s ease;
+}
+
+/* Style for social media icons */
+.social-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: 0.3s ease, color 0.3s ease;
+}
+
+
+.social-icon i {
+  font-size: 20px;
+}
+
+.social-links {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.social-links li {
+  display: inline-block;
+  margin-right: 10px;
 }

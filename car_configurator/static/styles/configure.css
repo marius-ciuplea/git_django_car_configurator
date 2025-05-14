@@ -1,8 +1,14 @@
 :root {
-  --grey: rgb(241, 239, 236);
-  --secondGrey: rgb(212, 201, 190);
-  --navy: rgb(18, 52, 88);
-  --Black: rgb(3, 3, 3);
+  --grey: #e8e8e8;
+  --grey2: #f5f5f5;
+  --grey3: #e0e0e0;
+  --grey4: #bdbdbd;
+  --blue-1: #5fc9f3;
+  --navy: rgb(8, 31, 55);
+  --blue-2: #2e79ba;
+  --blue-3: #1e549f;
+  --black: rgb(3, 3, 3);
+  --green: #4caf50;
 }
 
 body {

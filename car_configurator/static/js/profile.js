@@ -1,70 +1,133 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let selectedMessageId = null;
+  let selectedId = null;
+  let selectedType = null; // 'message' or 'config'
 
-  // Handle the confirmation modal for deleting messages (on the delete page)
   const modal = document.getElementById("confirmModal");
   const confirmBtn = document.getElementById("confirmDelete");
   const cancelBtn = document.getElementById("cancelDelete");
 
-  // Handle delete confirmation modal (only on pages where delete action is possible)
-  if (modal) {
-    document.querySelectorAll(".delete-btn").forEach((button) => {
-      button.addEventListener("click", function () {
-        selectedMessageId = this.dataset.id;
-        modal.style.display = "flex"; // Show the confirmation modal
+  function showModal(id, type) {
+    selectedId = id;
+    selectedType = type;
+    modal.style.display = "flex";
+  }
+
+  // Message delete buttons
+  document.querySelectorAll(".delete-btn").forEach(button => {
+    button.addEventListener("click", function () {
+      showModal(this.dataset.id, "message");
+    });
+  });
+
+  // Config delete buttons
+  document.querySelectorAll(".saved-delete-btn").forEach(button => {
+    button.addEventListener("click", function () {
+      showModal(this.dataset.id, "config");
+    });
+  });
+
+  cancelBtn.addEventListener("click", function () {
+    modal.style.display = "none";
+    selectedId = null;
+    selectedType = null;
+  });
+
+  confirmBtn.addEventListener("click", function () {
+      if (!selectedId || !selectedType) return;
+
+      const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+      let url, body;
+
+      if (selectedType === "message") {
+          url = deleteMessageUrl; // URL for deleting messages
+          body = new URLSearchParams({
+              message_id: selectedId,
+          });
+      } else if (selectedType === "config") {
+          url = deleteConfigUrl; // URL for deleting configurations
+          body = new URLSearchParams({
+              config_id: selectedId, // Only send the config ID here
+          });
+      }
+
+      fetch(url, {
+          method: "POST",
+          headers: {
+              "X-CSRFToken": csrftoken,
+              "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: body,
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              // Determine which element to remove from the DOM
+              const elementId = selectedType === "message" ? "message-" : "config-";
+              const el = document.getElementById(elementId + selectedId);
+
+              if (el) {
+                const card = el.closest(".saved-config-card")
+
+                if (card) {
+                  card.remove();
+
+                } else { 
+                  el.remove();
+                }
+            }// Remove the element without refreshing the page
+          } else {
+              alert("Error deleting item.");
+          }
+          modal.style.display = "none";
+          selectedId = null;
+          selectedType = null;
+      })
+      .catch(error => {
+          console.error("Error:", error);
+          alert("An unexpected error occurred.");
+          modal.style.display = "none";
+          selectedId = null;
+          selectedType = null;
       });
     });
 
-    cancelBtn.addEventListener("click", function () {
-      modal.style.display = "none"; // Hide the confirmation modal
-      selectedMessageId = null;
-    });
+    document.querySelectorAll(".saved-send-btn").forEach(button => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
 
-    confirmBtn.addEventListener("click", function () {
-      if (!selectedMessageId) return;
-
+      const configId = this.dataset.id;
       const csrftoken = document.querySelector("[name=csrfmiddlewaretoken]").value;
 
-      fetch(deleteUrl, {
+      fetch(sendOfferUrl, {
         method: "POST",
         headers: {
           "X-CSRFToken": csrftoken,
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
-          message_id: selectedMessageId,
+          config_id: configId,
         }),
       })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.success) {
-            const msgEl = document.getElementById("message-" + selectedMessageId);
-            if (msgEl) msgEl.remove(); // Remove the message if successfully deleted
-          } else {
-            alert("Error deleting message.");
-          }
-          modal.style.display = "none"; // Hide the modal after action
-          selectedMessageId = null;
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert("An unexpected error occurred.");
-          modal.style.display = "none";
-          selectedMessageId = null;
-        });
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("Offer sent successfully!");
+          window.location.reload(); // Optional
+        } else {
+          alert("Error: " + (data.error || "Could not send offer."));
+        }
+      })
+      .catch(error => {
+        console.error("Error sending offer:", error);
+        alert("An unexpected error occurred.");
+      });
     });
-  }
+  });
 
-  
- 
-  // Reusable cancel button functionality for modals
-  // if (modalCancel) {
-  //   modalCancel.addEventListener("click", function () {
-  //     closeModal(); // Close the modal if cancel button is clicked
-  //   });
-  // }
+
+
+
 });
-
 
 
 

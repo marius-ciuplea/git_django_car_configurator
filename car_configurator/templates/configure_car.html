@@ -1,7 +1,4 @@
-{% extends 'base.html' %}
-{% block content %}
-
-{% load static %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,24 +6,41 @@
     <meta charset="UTF-8" />
     <title>Car Carousel</title>
     <style>
+      :root {
+        --grey: #e8e8e8;
+        --grey2: #f5f5f5;
+        --grey3: #e0e0e0;
+        --grey4: #bdbdbd;
+        --blue-1: #5fc9f3;
+        --navy: rgb(8, 31, 55);
+        --blue-2: #2e79ba;
+        --blue-3: #1e549f;
+        --black: rgb(3, 3, 3);
+        --green: #4caf50;
+      }
+
       .main-content {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: flex-start;
-        gap: 40px;
+        gap: 10px;
         padding: 20px;
+        margin-bottom: 150px;
+        margin-top: 50px;
       }
 
       .right-side {
         display: flex;
+        width: 100%;
         flex-direction: column;
+        justify-content: space-between;
       }
 
       .carousel {
         position: relative;
-        flex: 0 0 60%;
-        margin-left: 40px;
+        flex: 0 0 55%;
+        margin-left: 30px;
         overflow: hidden;
         border-radius: 12px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -55,7 +69,6 @@
         padding: 8px 12px;
         z-index: 1;
         border-radius: 50%;
-        
       }
 
       .carousel-btn:hover {
@@ -70,32 +83,29 @@
         right: 10px;
       }
 
-
       .options-container {
-        width: 100% ;
-        display: flex; 
-        
-        justify-content: center; 
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
         background-color: white;
-        padding: 20px;
+        padding: 10px;
       }
-      
+
       .color-circle {
-        width: 40px;
-        height: 40px;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
-        border: 2px solid #fff; /* white border makes it visible on dark background */
+        border: 2px solid #fff;
         margin-right: 10px;
         display: inline-block;
         cursor: pointer;
-        box-shadow: 0 0 5px rgba(0,0,0,0.5); /* optional glow to separate from background */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
       }
-      
+
       .color-circle:hover {
         transform: scale(1.1); /* Slightly enlarge circle on hover */
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
       }
-     
 
       .section {
         display: flex;
@@ -106,21 +116,27 @@
 
       .option-header {
         margin-bottom: 20px;
+        font-size: 1.2rem;
       }
 
-      .wheels-container, .engines-container, .colors-container {
+      .wheels-container,
+      .engines-container,
+      .colors-container {
         display: flex;
         gap: 10px;
         justify-content: center;
         align-items: center;
       }
 
-      .wheels-container, .engines-container {
+      .wheels-container,
+      .engines-container {
         display: flex;
         flex-direction: column;
       }
 
-      .wheel-name, .engine-name {
+      .wheel-name,
+      .engine-name {
+        width: 10rem;
         padding: 10px;
         border-radius: 8px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -128,24 +144,20 @@
         transition: transform 0.2s ease;
       }
 
-      .wheel-name:hover, .engine-name:hover {
-        transform: scale(1.1);
-      }
-
-      
-
-
+     
 
       .config-summary-container {
-        margin-left:auto;
+        width: 100%;
+        min-height: 365px;
         padding: 20px;
-        border: 1px solid #ccc;
+        margin-top: 30px;
         border-radius: 8px;
-        background-color: #f9f9f9;
-    }
+        
+      }
 
-      .config-summary-container h3 {
+      .config-summary-container h2 {
         text-align: center;
+        margin-bottom: 20px;
       }
 
       .config-summary-container p {
@@ -154,31 +166,111 @@
       }
 
       .config-summary-container strong {
-        font-size: 1.2em;
+        font-size: 1.2rem;
       }
 
+      .option-btn.selected {
+        border: 2px solid var(--blue-2);
+        border-radius: 8px;
+        background: none;
+      }
+
+
+
+      .buttons-form-container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 35px;
+        gap: 100px;
+      }
+
+
+
+
+    .save-config-btn,.send-offer-btn  {
+      height:3rem ;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      font-weight: bold;
+      transition: 0.3s ease, transform 0.3s ease;
+    }
+
+    .save-config-btn {
+      background:none ;
+      border: 1px solid var(--navy);
+      transition: 0.3s ease, transform 0.3s ease;
+    }
+
+
+    .save-config-btn:hover {
+      transform: scale(1.05);
+    }
+
+
+
+    .send-offer-btn {
+      background-color: var(--navy);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 0 0 rgba(8, 31, 55, 0.5);
+      animation: pulseShadow 2s infinite ease-out;
+      transition: 0.3s ease, transform 0.3s ease;
+    }
+
+    .send-offer-btn:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes pulseShadow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(8, 31, 55, 0.5);
+      }
+      70% {
+        box-shadow: 0 0 30px 30px rgba(8, 31, 55, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(8, 31, 55, 0);
+      }
+    }
+
+
+    .color-circle.selected {
+      border: 3px solid var(--blue-2);
+      box-shadow: 0 0 10px rgba(46, 121, 186, 0.6);
+    }
+
+ 
     </style>
   </head>
   <body>
-    
+
+
+
     <div class="main-content">
+      
       <div class="carousel">
-        <div class="carousel-track">
-        </div>
+        <div class="carousel-track"></div>
         <button class="carousel-btn prev">&#10094;</button>
         <button class="carousel-btn next">&#10095;</button>
       </div>
-    
 
       <div class="right-side">
-      
-      <div class="options-container">
-
-        <div class="section">
-          <div class="option-header"><strong>COLORS</strong></div>
-          <div class="colors-container">
-            {% for color in colors %}
-              <div class="color-circle-container" style="text-align: center; cursor: pointer;">
+        <div class="options-container">
+          <div class="section">
+            <div class="option-header"><strong>COLORS</strong></div>
+            <div class="colors-container">
+              {% for color in colors %}
+              <div
+                class="color-circle-container"
+                style="text-align: center; cursor: pointer"
+              >
                 <div
                   class="color-circle"
                   data-color-id="{{ color.id }}"
@@ -187,109 +279,145 @@
                   title="{{ color.name }}"
                 ></div>
               </div>
-              <div class="color-info" id="colorInfo-{{ color.id }}" style="display: none; font-weight: bold; font-size: 1.1em; margin-top: 100px; position: absolute;">
+              <div
+                class="color-info"
+                id="colorInfo-{{ color.id }}"
+                style="
+                  display: none;
+                  font-weight: bold;
+                  font-size: 1.1em;
+                  margin-top: 100px;
+                  position: absolute;
+                "
+              >
                 <!-- This will be populated with color details on click -->
               </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
-        </div>
 
-
-        <div class="section">
-          <div class="option-header"><strong>WHEELS</strong></div>
-          <div class="wheels-container">
-            {% for wheel in wheels %}
-              <div class="wheel-option" style="text-align: center; cursor: pointer;">
-                <div class="wheel-name" data-wheel-id="{{ wheel.id }}" data-price="{{ wheel.price }}" title="{{ wheel.size }} - {{ wheel.style }}">
+          <div class="section">
+            <div class="option-header"><strong>WHEELS</strong></div>
+            <div class="wheels-container">
+              {% for wheel in wheels %}
+              <div
+                class="wheel-option option-btn"
+                onclick="selectOption(this)"
+                style="text-align: center; cursor: pointer"
+              >
+                <div
+                  class="wheel-name"
+                  data-wheel-id="{{ wheel.id }}"
+                  data-price="{{ wheel.price }}"
+                  title="{{ wheel.size }} - {{ wheel.style }}"
+                >
                   {{ wheel.size }} - {{ wheel.style }}
                 </div>
               </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
-        </div>
-      
-        <div class="section">
-          <div class="option-header"><strong>ENGINES</strong></div>
-          <div class="engines-container">
-            {% for engine in engines %}
-              <div class="engine-option" style="text-align: center; cursor: pointer;">
-                <div class="engine-name" data-engine-id="{{ engine.id }}" data-price="{{ engine.price }}" title="{{ engine.name }} - {{ engine.power }} HP">
+
+          <div class="section">
+            <div class="option-header"><strong>ENGINES</strong></div>
+            <div class="engines-container">
+              {% for engine in engines %}
+              <div
+                class="engine-option option-btn"
+                onclick="selectOption(this)"
+                style="text-align: center; cursor: pointer"
+              >
+                <div
+                  class="engine-name"
+                  data-engine-id="{{ engine.id }}"
+                  data-price="{{ engine.price }}"
+                  title="{{ engine.name }} - {{ engine.power }} HP"
+                >
                   {{ engine.name }} - {{ engine.power }} HP
                 </div>
               </div>
-            {% endfor %}
+              {% endfor %}
+            </div>
           </div>
         </div>
-        </div>
-
-
-
 
         <div class="config-summary-container">
-          
+          <div class="summary-options">
+            <h2>{{ car.company_name }} {{ car.model_name }}</h2>
             <h3>Configuration Summary</h3>
-            <p>Selected Engine: <span id="selectedEngine">-</span></p>
-            <p>Selected Color: <span id="selectedColor">-</span></p>
-            <p>Selected Wheels: <span id="selectedWheel">-</span></p>
-            <p><strong>Total Price: <span id="totalPriceDisplay">0.00</span> €</strong></p>
+            <p>Engine: <span id="selectedEngine">-</span>(<span id="enginePrice"></span> €)</p>
+            <p>Color: <span id="selectedColor">-</span>(<span id="colorPrice"></span> €)</p>
+            <p>Wheels: <span id="selectedWheel">-</span>(<span id="wheelPrice"></span> €)</p>
+            <p>
+              <strong
+                >Total Price: <span id="totalPriceDisplay">0.00</span> €</strong
+              >
+            </p>
+          </div>
+
+          <div class="buttons-form-container"> 
+
+            <form method="post">
+
+              {% if existing_config_id %}
+              <input type="hidden" name="config_id" value="{{ existing_config_id }}">
+              {% endif %}
+
+
+              {% csrf_token %}
+              <div style="display: none;">
+              <label for="engine">Engine</label>
+              <select id="engine" name="engine">
+                {% for engine in engines %}
+                  <option value="{{ engine.id }}" data-price="{{ engine.price }}" {% if engine.price == 0 %}selected{% endif %}>
+                    {{ engine.name }} - {{ engine.power }} HP
+                  </option>
+                {% endfor %}
+              </select>
+            
+
+              
+              <label for="color">Choose color:</label>
+              <select id="color" name="color">
+                {% for color in colors %}
+                <option 
+                value="{{ color.id }}"
+                data-price="{{ color.price }}"
+                data-images='[{% for img in color.images.all %}"{{ img.image.url }}"{% if not forloop.last %}, {% endif %}{% endfor %}]'
+                {% if color.price == 0 %}selected{% endif %}>
+                {{ color.name }}
+              </option>
+              {% endfor %}
+            </select>
+        
           
-       
+          
+            <label for="wheel">Choose wheels:</label>
+            <select id="wheel" name="wheel">
+              {% for wheel in wheels %}
+                <option value="{{ wheel.id }}" data-price="{{ wheel.price }}" {% if wheel.price == 0 %}selected{% endif %}>
+                  {{ wheel.size }} - {{ wheel.style }}
+                </option>
+              {% endfor %}
+            </select>
+          
+            <p>Base price: <span id="basePrice">{{ car.base_price }}</span> €</p>
+            <p><strong>Total price: <span id="totalPrice"></span> €</strong></p>
+          </div>
+            <button type="submit" name="action" value="save" class="save-config-btn" > Save Configuration </button>
+
+            <button type="submit" name="action" value="send_offer" class="send-offer-btn">Send Offer</button>
+          </form>
+        </div>  
+        <!-- Aici se termina -->
+
+
+
         </div>
 
       </div>
 
-
-
-      
-        <form method="post"  >
-          {% csrf_token %}
-          <div style="display: none;">
-          <label for="engine">Engine</label>
-          <select id="engine" name="engine">
-            {% for engine in engines %}
-              <option value="{{ engine.id }}" data-price="{{ engine.price }}" {% if engine.price == 0 %}selected{% endif %}>
-                {{ engine.name }} - {{ engine.power }} HP
-              </option>
-            {% endfor %}
-          </select>
-          
-
-            
-            <label for="color">Choose color:</label>
-            <select id="color" name="color">
-              {% for color in colors %}
-              <option 
-              value="{{ color.id }}"
-              data-price="{{ color.price }}"
-              data-images='[{% for img in color.images.all %}"{{ img.image.url }}"{% if not forloop.last %}, {% endif %}{% endfor %}]'
-              {% if color.price == 0 %}selected{% endif %}>
-              {{ color.name }}
-            </option>
-            {% endfor %}
-          </select>
-       
-        
-        
-          <label for="wheel">Choose wheels:</label>
-          <select id="wheel" name="wheel">
-            {% for wheel in wheels %}
-              <option value="{{ wheel.id }}" data-price="{{ wheel.price }}" {% if wheel.price == 0 %}selected{% endif %}>
-                {{ wheel.size }} - {{ wheel.style }}
-              </option>
-            {% endfor %}
-          </select>
-        
-          <p>Base price: <span id="basePrice">{{ car.base_price }}</span> €</p>
-          <p><strong>Total price: <span id="totalPrice"></span> €</strong></p>
-        
-          <button type="submit" style="margin-top: 10px; padding: 10px 20px;">Save Configuration</button>
-        </form>
-    
-
-
-    
-
-
+    </div>
 
     <script>
       const track = document.querySelector(".carousel-track");
@@ -297,30 +425,45 @@
       const prevBtn = document.querySelector(".carousel-btn.prev");
       const nextBtn = document.querySelector(".carousel-btn.next");
       let currentIndex = 0;
-      
+
       function updateCarousel() {
         images = document.querySelectorAll(".carousel-image"); // update reference
         if (images.length === 0) return;
         const width = images[0].clientWidth;
         track.style.transform = `translateX(-${currentIndex * width}px)`;
       }
-      
+
       // ✅ Color circle click logic
-      document.querySelectorAll(".color-circle").forEach(circle => {
+      document.querySelectorAll(".color-circle").forEach((circle) => {
         circle.addEventListener("click", function () {
           const imagesData = this.dataset.images;
           const colorId = this.dataset.colorId;
-      
+
+
+
+            // Remove 'selected' class from all color circles
+          document.querySelectorAll(".color-circle").forEach((c) =>
+            c.classList.remove("selected")
+          );
+
+          // Add 'selected' class to the clicked circle
+          this.classList.add("selected");
+
           try {
             const imageUrls = JSON.parse(imagesData.replace(/'/g, '"'));
-      
+
             const carouselTrack = document.querySelector(".carousel-track");
             const newImages = imageUrls
-              .map((url, index) => `<img src="${url}" class="carousel-image" alt="Color image ${index + 1}">`)
+              .map(
+                (url, index) =>
+                  `<img src="${url}" class="carousel-image" alt="Color image ${
+                    index + 1
+                  }">`
+              )
               .join("");
-      
+
             carouselTrack.innerHTML = newImages;
-      
+
             // Reset index and update references
             currentIndex = 0;
             images = document.querySelectorAll(".carousel-image");
@@ -328,51 +471,60 @@
           } catch (e) {
             console.error("Failed to load images for selected color:", e);
           }
-      
-          const selectedOption = document.querySelector(`#color option[value="${colorId}"]`);
+
+          const selectedOption = document.querySelector(
+            `#color option[value="${colorId}"]`
+          );
           const colorName = selectedOption.textContent.trim();
           const colorPrice = selectedOption.dataset.price;
-      
+
           // Hide all other color info divs
-          document.querySelectorAll(".color-info").forEach(infoDiv => {
+          document.querySelectorAll(".color-info").forEach((infoDiv) => {
             infoDiv.style.display = "none";
           });
-      
+
           // Display the price for the selected color
-          const selectedPriceDiv = document.getElementById(`colorInfo-${colorId}`);
+          const selectedPriceDiv = document.getElementById(
+            `colorInfo-${colorId}`
+          );
           if (selectedPriceDiv) {
             selectedPriceDiv.style.display = "block"; // Show the price for the selected color
             selectedPriceDiv.innerHTML = `${colorPrice} €`; // Update the price displayed
           }
-      
+
           // Update the color select dropdown to match the clicked color
           const colorSelect = document.getElementById("color");
           colorSelect.value = colorId;
           updateTotalPrice(); // Update the total price based on new color selection
         });
+
+
+
       });
-      
+
       nextBtn.addEventListener("click", () => {
         currentIndex = (currentIndex + 1) % images.length;
         updateCarousel();
       });
-      
+
       prevBtn.addEventListener("click", () => {
         currentIndex = (currentIndex - 1 + images.length) % images.length;
         updateCarousel();
       });
-      
+
       window.addEventListener("resize", updateCarousel);
-      
+
       function getSelectedOptionPrice(selectId) {
         const select = document.getElementById(selectId);
         if (!select || select.selectedIndex === -1) return 0;
         const selectedOption = select.options[select.selectedIndex];
         return parseFloat(selectedOption.dataset.price || 0);
       }
-      
+
       function updateTotalPrice() {
-        const basePrice = parseFloat(document.getElementById("basePrice").innerText);
+        const basePrice = parseFloat(
+          document.getElementById("basePrice").innerText
+        );
         const engineSelect = document.getElementById("engine");
         const colorSelect = document.getElementById("color");
         const wheelSelect = document.getElementById("wheel");
@@ -383,66 +535,125 @@
 
         const total = basePrice + enginePrice + colorPrice + wheelPrice;
 
+        // Update the total price in both summary and form
         document.getElementById("totalPrice").innerText = total.toFixed(2);
         document.getElementById("totalPriceDisplay").innerText = total.toFixed(2);
 
-        // Update display texts
-        document.getElementById("selectedEngine").innerText = engineSelect.options[engineSelect.selectedIndex].text;
-        document.getElementById("selectedColor").innerText = colorSelect.options[colorSelect.selectedIndex].text;
-        document.getElementById("selectedWheel").innerText = wheelSelect.options[wheelSelect.selectedIndex].text;
-}
+        // Update display texts for selected options
+        document.getElementById("selectedEngine").innerText =
+          engineSelect.options[engineSelect.selectedIndex].text;
+        document.getElementById("selectedColor").innerText =
+          colorSelect.options[colorSelect.selectedIndex].text;
+        document.getElementById("selectedWheel").innerText =
+          wheelSelect.options[wheelSelect.selectedIndex].text;
 
+        // Update individual prices
+        document.getElementById("enginePrice").innerText = enginePrice.toFixed(2);
+        document.getElementById("colorPrice").innerText = colorPrice.toFixed(2);
+        document.getElementById("wheelPrice").innerText = wheelPrice.toFixed(2);
+      }
 
+      document.querySelectorAll(".wheel-name").forEach((wheel) => {
+        wheel.addEventListener("click", function () {
+          const wheelId = this.dataset.wheelId;
+          const wheelPrice = parseFloat(this.dataset.price);
 
+          // Set the selected wheel in the dropdown
+          document.getElementById("wheel").value = wheelId;
 
-        document.querySelectorAll(".wheel-name").forEach(wheel => {
-                wheel.addEventListener("click", function() {
-                    const wheelId = this.dataset.wheelId;
-                    const wheelPrice = parseFloat(this.dataset.price);
-                    
-                    // Set the selected wheel in the dropdown
-                    document.getElementById("wheel").value = wheelId;
-                    
-                    // Manually trigger the total price update
-                    updateTotalPrice();
-                });
-            });
-
-        document.querySelectorAll(".engine-name").forEach(engine => {
-            engine.addEventListener("click", function() {
-                const engineId = this.dataset.engineId;
-                const enginePrice = parseFloat(this.dataset.price);
-                
-                // Set the selected engine in the dropdown
-                document.getElementById("engine").value = engineId;
-                
-                // Manually trigger the total price update
-                updateTotalPrice();
-            });
+          // Manually trigger the total price update
+          updateTotalPrice();
         });
-      
+      });
+
+      document.querySelectorAll(".engine-name").forEach((engine) => {
+        engine.addEventListener("click", function () {
+          const engineId = this.dataset.engineId;
+          const enginePrice = parseFloat(this.dataset.price);
+
+          // Set the selected engine in the dropdown
+          document.getElementById("engine").value = engineId;
+
+          // Manually trigger the total price update
+          updateTotalPrice();
+        });
+      });
+
       // Update price when engine, color, or wheel changes
-      document.getElementById("engine").addEventListener("change", updateTotalPrice);
-      document.getElementById("color").addEventListener("change", updateTotalPrice);
-      document.getElementById("wheel").addEventListener("change", updateTotalPrice);
-      
+      document
+        .getElementById("engine")
+        .addEventListener("change", updateTotalPrice);
+      document
+        .getElementById("color")
+        .addEventListener("change", updateTotalPrice);
+      document
+        .getElementById("wheel")
+        .addEventListener("change", updateTotalPrice);
+
       // ✅ On page load: initialize total price and simulate click on default color
       window.addEventListener("load", () => {
         updateTotalPrice();
         updateCarousel();
-      
-        const defaultColorOption = document.querySelector("#color option[selected]");
+
+        const defaultColorOption = document.querySelector(
+          "#color option[selected]"
+        );
         if (defaultColorOption) {
           const defaultColorId = defaultColorOption.value;
-          const colorCircle = document.querySelector(`.color-circle[data-color-id="${defaultColorId}"]`);
+          const colorCircle = document.querySelector(
+            `.color-circle[data-color-id="${defaultColorId}"]`
+          );
           if (colorCircle) {
             setTimeout(() => colorCircle.click(), 50); // delay ensures images render first
           }
         }
       });
+
+      function selectOption(button) {
+  // Find the closest container (e.g., wheels-container or engines-container)
+        const container = button.closest(".wheels-container, .engines-container");
+
+        // Remove 'selected' class only within that container
+        const buttonsInGroup = container.querySelectorAll(".option-btn");
+        buttonsInGroup.forEach((btn) => btn.classList.remove("selected"));
+
+        // Add 'selected' class to the clicked button
+        button.classList.add("selected");
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+    // Highlight default wheel
+        const selectedWheelOption = document.querySelector('#wheel option[selected]');
+        if (selectedWheelOption) {
+          const wheelId = selectedWheelOption.value;
+          const wheelDiv = document.querySelector(`[data-wheel-id="${wheelId}"]`);
+          if (wheelDiv) {
+            wheelDiv.parentElement.classList.add("selected");
+          }
+        }
+
+        // Highlight default engine
+        const selectedEngineOption = document.querySelector('#engine option[selected]');
+        if (selectedEngineOption) {
+          const engineId = selectedEngineOption.value;
+          const engineDiv = document.querySelector(`[data-engine-id="${engineId}"]`);
+          if (engineDiv) {
+            engineDiv.parentElement.classList.add("selected");
+          }
+        }
+
+        // Highlight default color
+        const selectedColorOption = document.querySelector('#color option[selected]');
+        if (selectedColorOption) {
+          const colorId = selectedColorOption.value;
+          const colorDiv = document.querySelector(`[data-color-id="${colorId}"]`);
+          if (colorDiv) {
+            colorDiv.classList.add("selected");
+            colorDiv.click(); // Simulate click to load carousel images
+          }
+        }
+      });
     </script>
-    
-    
   </body>
 </html>
 {% endblock %}

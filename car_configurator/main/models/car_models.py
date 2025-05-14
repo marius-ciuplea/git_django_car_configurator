@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from decimal import Decimal
 
 class CarModel(models.Model):
     company_name = models.CharField(max_length=200)
@@ -55,6 +54,7 @@ class Configuration(models.Model):
     engine = models.ForeignKey(Engine, on_delete=models.SET_NULL, null=True)
     color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True)
     wheel = models.ForeignKey(Wheel, on_delete=models.SET_NULL, null=True)
+    offered_config = models.BooleanField(default=False, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def total_price(self):
@@ -65,7 +65,16 @@ class Configuration(models.Model):
             (self.color.price if self.color else 0) +
             (self.wheel.price if self.wheel else 0)
         )
+        
 
         
     def __str__(self):
         return f"{self.user.username}'s {self.car_model.model_name} config"
+    
+    
+    
+
+
+# class ClientRequestsModel(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    
