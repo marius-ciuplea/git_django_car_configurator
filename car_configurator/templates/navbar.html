@@ -7,7 +7,6 @@
     <a href="{% url 'home' %}"><img src="{% static 'images/logo1.png' %}" alt="Logo" /></a>
   </div>
 
-
   {% with request.resolver_match.url_name as current_url %}
   <ul class="nav-links">
     <li>
@@ -36,11 +35,9 @@
     {% else %}
 
     <li><a href="{% url 'login' %}">Login </a></li>
-
     <li class="li-profile-pic">
       <a href="{% url 'login' %}"><img src="{% static 'images/default_profile.png' %}" alt="Guest Profile" class="profile-pic" width="34px" height="34px"/></a>
     </li>
-
 
     {% endif %}
   </ul>

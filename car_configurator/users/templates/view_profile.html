@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="{% static 'styles/profile_style.css' %}" />
 
 <div class="profile-container">
-
   <div id="message-container" class="messages"></div>
 
   <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
@@ -13,11 +12,11 @@
     <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-picture-top"/>
     {% endif %}
     <h1>{{ profile.user.username|title }}'s Profile</h1>
+
   </div>
 
   <div class="profile-main-content">
     {% if not edit_mode %}
-
     <div class="profile-left">
 
       <!-- Profile details section -->
@@ -25,9 +24,8 @@
         <h2>Profile Details</h2>
         <div class="profile-details">
 
-          <div class="profile-item">
-            <!-- Could add more details here -->
-          </div>
+          <div class="profile-item"></div>
+
           <div class="profile-item">
             <strong>Username:</strong>
             <p>{{ profile.user.username }}</p>
@@ -66,11 +64,9 @@
           </div>
         {% endif %}
       </div>
-
     </div>
 
     <div class="profile-right">
-
       <div class="profile-configs">
         <h2>Saved Configurations</h2>
 

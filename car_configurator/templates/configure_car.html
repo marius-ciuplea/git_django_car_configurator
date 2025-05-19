@@ -95,13 +95,7 @@
           </div>
 
           <div class="buttons-form-container"> 
-
             <form method="post">
-
-              {% comment %} {% if existing_config_id %}
-              <input type="hidden" name="config_id" value="{{ existing_config_id }}">
-              {% endif %} {% endcomment %}
-
 
               {% csrf_token %}
               <div style="display: none;">
@@ -113,9 +107,7 @@
                   </option>
                 {% endfor %}
               </select>
-            
 
-              
               <label for="color">Choose color:</label>
               <select id="color" name="color">
                 {% for color in colors %}
@@ -128,9 +120,7 @@
               </option>
               {% endfor %}
             </select>
-        
-          
-          
+
             <label for="wheel">Choose wheels:</label>
             <select id="wheel" name="wheel">
               {% for wheel in wheels %}

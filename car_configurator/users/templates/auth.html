@@ -1,44 +1,5 @@
 {% extends "base.html" %} {% load static %} {% block content %}
 
-<!-- <div class="login-container">
-  <div class="login-card">
-
-    {% if user.is_authenticated %}
-      <h2>Welcome, {{ user.username }}!</h2>
-      <a href="{% url 'logout' %}" class="login-btn">🚪 Logout</a>
-
-    {% elif form_type == "login" %}
-      <h2>LOGIN</h2>
-      <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="login-btn"><span>🔒</span> <span style=" transform: translateX(-150%) ; align-self: center;">Login</span>  </button>
-      </form>
-      <p class="signup-link">
-        Haven't signed up yet? <a href="{% url 'register' %}">Sign Up</a>
-      </p>
-
-    {% elif form_type == "register" %}
-      <h2>REGISTER</h2>
-      <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="login-btn">
-          <span >📝</span>
-          <span style=" transform: translateX(-150%) ; align-self: center;">Register</span> 
-          </button>
-      </form>
-      <p class="signup-link">
-        Already have an account? <a href="{% url 'login' %}">Login here</a>
-      </p>
-
-    {% endif %}
-
-
-
-  </div>
-</div> -->
-
 <div class="login-container">
   <div class="login-card">
     <h2>{{ form_type|title }}</h2>

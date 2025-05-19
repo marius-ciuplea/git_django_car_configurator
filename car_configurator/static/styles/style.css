@@ -50,7 +50,7 @@ html, body {
 }
 
 .main-content {
-  flex: 1; /* Takes all available vertical space */
+  flex: 1; 
 }
 
 
@@ -129,12 +129,7 @@ html, body {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-
-
 }
-
-
-
 
 .nav-links {
   display: flex;
@@ -165,14 +160,13 @@ html, body {
   font-weight: bold;
 }
 
-/* Navbar background on contact page */
 .on-contact-page {
   background-color: #e8e8e8;
 }
 
 .contact_page-line {
   width: 100%;
-  border: 1px solid #ccc; /* Light gray line */
+  border: 1px solid #ccc; 
 }
 
 
@@ -296,7 +290,7 @@ html, body {
 }
 .carousel-slide img {
   width: 100%;
-  
+  margin-top: -95px;
 }
 
 button.prev,
@@ -366,8 +360,7 @@ button.next:hover {
 
 .car-card {
   background-color: white;
-  width: calc(33.33% - 1rem);  /* 3 cards per row, minus the gap */
-  border-radius: 12px;
+  width: calc(33.33% - 1rem);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
@@ -427,12 +420,9 @@ button.next:hover {
   font-size: 1.2rem;
 }
 
-
 .configure-button:hover {
   background-color: rgba(15, 40, 70, 1);
 }
-
-
 
 /*--------------------- login/register -----------------------*/
 
@@ -769,7 +759,7 @@ h3 {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5); 
-  z-index: 9998; /* under the success-popup (9999) */
+  z-index: 9998;
 }
 
 #page-content {
@@ -867,7 +857,6 @@ h3 {
   transition: 0.3s ease, color 0.3s ease;
 }
 
-
 .social-icon i {
   font-size: 20px;
 }
@@ -882,7 +871,6 @@ h3 {
   display: inline-block;
   margin-right: 10px;
 }
-
 
 /* @media screen and (max-width: 479px) {
 

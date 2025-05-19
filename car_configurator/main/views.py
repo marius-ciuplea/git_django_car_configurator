@@ -11,7 +11,6 @@ from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 
-
 class HomeView(TemplateView):
     template_name = 'home.html'
     
@@ -29,11 +28,6 @@ class ConfigureView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['cars'] = CarModel.objects.all()
         return context
-
-
-
-
-
 
 class CreateConfigurationView(View):
     def get(self, request, car_id):
@@ -91,7 +85,7 @@ class UpdateConfigurationView(View):
             'colors': Color.objects.filter(car_model=car),
             'engines': Engine.objects.filter(car_model=car),
             'wheels': Wheel.objects.filter(car_model=car),
-            'config_id': config_id  # 👈 add this so the template has access to it
+            'config_id': config_id
         })
 
     def post(self, request, config_id):
@@ -143,10 +137,8 @@ def delete_configuration_ajax(request):
 @require_POST
 def send_offer_ajax(request):
     config_id = request.POST.get('config_id')
-
     if not config_id:
         return JsonResponse({'success': False, 'error': 'Missing config ID'})
-
     try:
         config = Configuration.objects.get(id=config_id, user=request.user)
         config.offered_config = True

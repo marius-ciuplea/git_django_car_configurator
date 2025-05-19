@@ -37,9 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });
 
-
-  
-
   // Toggle dropdown menu for user profile
 const toggle = document.getElementById("userDropdownToggle");
 const menu = document.getElementById("userDropdownMenu");

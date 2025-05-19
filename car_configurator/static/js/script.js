@@ -98,8 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
     startAutoScroll();
   }
 
-
-
   const popupMessages = document.querySelectorAll(".popup-message");
   popupMessages.forEach((popup, index) => {
     setTimeout(() => {

@@ -1,4 +1,3 @@
-
       const track = document.querySelector(".carousel-track");
       let images = document.querySelectorAll(".carousel-image");
       const prevBtn = document.querySelector(".carousel-btn.prev");
@@ -17,8 +16,6 @@
         circle.addEventListener("click", function () {
           const imagesData = this.dataset.images;
           const colorId = this.dataset.colorId;
-
-
 
             // Remove 'selected' class from all color circles
           document.querySelectorAll(".color-circle").forEach((c) =>
@@ -42,7 +39,6 @@
               .join("");
 
             carouselTrack.innerHTML = newImages;
-
             // Reset index and update references
             currentIndex = 0;
             images = document.querySelectorAll(".carousel-image");
@@ -67,8 +63,6 @@
           colorSelect.value = colorId;
           updateTotalPrice(); // Update the total price based on new color selection
         });
-
-
 
       });
 

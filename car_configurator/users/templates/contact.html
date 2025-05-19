@@ -1,5 +1,4 @@
 {% extends "base.html" %} {% load static %} {% block content %}
-
 <div id="page-content">
   <div class="contact-page-wrapper">
     <div class="contact-container">
@@ -8,13 +7,8 @@
       <div class="reason-contact">
         <ul>
           <p id="reason-contact-paragraph">Feel free to reach us</p>
-          <li>
-            <span class="valid-sign">&#10003;</span> You have questions about
-            our products
-          </li>
-          <li>
-            <span class="valid-sign">&#10003;</span> Need technical support
-          </li>
+          <li> <span class="valid-sign">&#10003;</span> You have questions about our products </li>
+          <li> <span class="valid-sign">&#10003;</span> Need technical support</li>
           <li><span class="valid-sign">&#10003;</span> Have any feedback</li>
           <li><span class="valid-sign">&#10003;</span> Have any suggestions</li>
         </ul>
@@ -41,11 +35,7 @@
 <!-- Success message container -->
 <div id="success-popup" class="success-popup hidden">
   <p>Your message was successfully sent!</p>
-  <button
-    id="go-home-button"
-    class="go-home-button hidden"
-    onclick="window.location.href='/'"
-  >
+  <button id="go-home-button" class="go-home-button hidden" onclick="window.location.href='/'">
     Go to Home Page
   </button>
 </div>

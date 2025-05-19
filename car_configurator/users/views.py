@@ -40,8 +40,6 @@ class LoginView(View):
         else:
                # Remove the default error message
             form.errors.clear()
-             
-            # Custom error message for invalid login attempt
             messages.error(request, 'Please enter a correct username and password. Note that both fields may be case-sensitive.',  extra_tags='error-message')
             
         return render(request, self.template_name, {
@@ -155,22 +153,6 @@ class ProfileView(LoginRequiredMixin, View):
             'has_offered_configs': offered_configs.exists(),
         }
         return render(request, self.template_name, context)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def contact_view(request):
