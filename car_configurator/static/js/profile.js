@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
               // Determine which element to remove from the DOM
               const elementId = selectedType === "message" ? "message-" : "config-";
               const el = document.getElementById(elementId + selectedId);
-
+              
               if (el) {
                 const card = el.closest(".saved-config-card")
 
@@ -123,8 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
-
-
 
 
 });

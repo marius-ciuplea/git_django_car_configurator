@@ -35,13 +35,14 @@ class LoginView(View):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            messages.success(request, 'Logged in successfully', extra_tags='success-message')
             return redirect('home')
         else:
                # Remove the default error message
             form.errors.clear()
              
             # Custom error message for invalid login attempt
-            messages.error(request, 'Please enter a correct username and password. Note that both fields may be case-sensitive.')
+            messages.error(request, 'Please enter a correct username and password. Note that both fields may be case-sensitive.',  extra_tags='error-message')
             
         return render(request, self.template_name, {
             'form': form,
@@ -72,7 +73,7 @@ class RegisterView(View):
             user.save()
             login(request, user)
             return redirect('home')
-        messages.error(request, 'Registration failed.')
+        messages.error(request, 'Registration failed', extra_tags='error-message')
         return render(request, self.template_name, {
             'form': form,
             'form_type': 'register'
@@ -84,7 +85,7 @@ class CustomLogoutView(View):
     def get(self, request):
         if request.user.is_authenticated:
             logout(request)
-            messages.success(request, "You have been logged out successfully.")
+            messages.success(request, "You have been logged out successfully.",  extra_tags='success-message')
         return redirect('home')
 
 
@@ -111,7 +112,7 @@ def view_profile(request):
             
             profile_form.save()
     
-            messages.success(request, 'Profile updated successfully!')
+            messages.success(request, 'Profile updated successfully!',  extra_tags='success-message')
             return redirect('view_profile')
     else:
         user_form = ProfileUpdateForm(instance=request.user)
@@ -130,17 +131,6 @@ def view_profile(request):
 
     return render(request, 'view_profile.html', context)
 
-
-# # Profile Update View
-# class ProfileUpdateView(UpdateView):
-#     model = Profile
-#     form_class = ProfileForm
-#     template_name = 'users/update_profile.html'
-#     success_url = reverse_lazy('view_profile')  # Redirect after successful update
-
-#     def get_object(self):
-#         # Get the Profile object for the logged-in user
-#         return get_object_or_404(Profile, user=self.request.user)
 
 def contact_view(request):
     form = ContactFormForm(request.POST or None)

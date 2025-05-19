@@ -2,54 +2,30 @@
 <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
 
 <nav class="navbar">
+
   <div class="logo">
-    <a href="{% url 'home' %}">
-      <img src="{% static 'images/logo1.png' %}" alt="Logo" />
-    </a>
+    <a href="{% url 'home' %}"><img src="{% static 'images/logo1.png' %}" alt="Logo" /></a>
   </div>
+
 
   {% with request.resolver_match.url_name as current_url %}
   <ul class="nav-links">
     <li>
-      <a
-        href="{% url 'home' %}"
-        class="{% if current_url == 'home' %}active{% endif %}"
-        >Home</a
-      >
+      <a href="{% url 'home' %}" class="{% if current_url == 'home' %}active{% endif %}">Home</a>
     </li>
     <li>
-      <a
-        href="{% url 'configure_car_list' %}"
-        class="{% if current_url == 'configure_car_list' %}active{% endif %}"
-        >Models</a
-      >
+      <a href="{% url 'configure_car_list' %}" class="{% if current_url == 'configure_car_list' %}active{% endif %}">Models</a>
     </li>
     <li>
-      <a
-        href="{% url 'contact_form' %}"
-        class="{% if current_url == 'contact_form' %}active{% endif %}"
-        >Contact</a
-      >
+      <a href="{% url 'contact_form' %}" class="{% if current_url == 'contact_form' %}active{% endif %}">Contact</a>
     </li>
 
     {% if user.is_authenticated %}
     <li class="user-dropdown">
       {% if user.profile.profile_picture %}
-      <img
-        src="{{ user.profile.profile_picture.url }}"
-        alt="User Profile"
-        class="profile-pic"
-        id="userDropdownToggle"
-      />
+      <img src="{{ user.profile.profile_picture.url }}" alt="User Profile" class="profile-pic" id="userDropdownToggle"/>
       {% else %}
-      <img
-        src="{% static 'images/profile.png' %}"
-        alt="User Profile"
-        class="profile-pic"
-        width="38px"
-        height="38px"
-        id="userDropdownToggle"
-      />
+      <img src="{% static 'images/profile.png' %}" alt="User Profile" class="profile-pic" width="38px" height="38px" id="userDropdownToggle"/>
       {% endif %}
 
       <ul class="dropdown-menu" id="userDropdownMenu">
@@ -62,14 +38,7 @@
     <li><a href="{% url 'login' %}">Login </a></li>
 
     <li class="li-profile-pic">
-      <a href="{% url 'login' %}"
-        ><img
-          src="{% static 'images/default_profile.png' %}"
-          alt="Guest Profile"
-          class="profile-pic"
-          width="34px"
-          height="34px"
-      /></a>
+      <a href="{% url 'login' %}"><img src="{% static 'images/default_profile.png' %}" alt="Guest Profile" class="profile-pic" width="34px" height="34px"/></a>
     </li>
 
 

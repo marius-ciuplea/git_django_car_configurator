@@ -151,3 +151,21 @@ select {
 .submit-button:hover {
   background-color: #0f2846;
 }
+
+
+
+
+@media (min-width: 480px) and (max-width: 767px) { 
+  .card-container-home {
+    display: flex;
+    flex-direction: column;
+  }
+ }
+
+ @media (max-width: 479px) {
+  
+  .card-container-home {
+    display: flex;
+    flex-direction: column;
+  }
+  }

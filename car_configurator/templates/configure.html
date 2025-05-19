@@ -18,9 +18,7 @@
       {% localize on %}
       <p>Choose now! Price starts at {{ car.base_price }} €</p>
       {% endlocalize %}
-      <a href="{% url 'configure_car' car.id %}" class="configure-button"
-        >Configure</a
-      >
+      <a href="{% url 'create_config' car.id %}" class="configure-button">Configure</a> 
     </div>
   </div>
   {% endfor %}

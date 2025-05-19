@@ -57,7 +57,7 @@
           autofocus
         />
         {% if form.username.errors %}
-        <div>{{ form.username.errors|join:", " }}</div>
+        <div style="color:red;">{{ form.username.errors|join:", " }}</div>
         {% endif %}
       </div>
       <!-- Email Field -->
@@ -71,7 +71,7 @@
           required
         />
         {% if form.email.errors %}
-        <div>{{ form.email.errors|join:", " }}</div>
+        <div style="color:red;">{{ form.email.errors|join:", " }}</div>
         {% endif %}
       </div>
       <!-- Password1 Field -->
@@ -81,7 +81,7 @@
           <input type="password" name="password1" id="id_password1" required />
         </div>
         {% if form.password1.errors %}
-        <div>{{ form.password1.errors|join:", " }}</div>
+        <div style="color:red;">{{ form.password1.errors|join:", " }}</div>
         {% endif %}
       </div>
       <!-- Password2 Field -->
@@ -91,7 +91,7 @@
           <input type="password" name="password2" id="id_password2" required />
         </div>
         {% if form.password2.errors %}
-        <div>{{ form.password2.errors|join:", " }}</div>
+        <div style="color:red;">{{ form.password2.errors|join:", " }}</div>
         {% endif %}
       </div>
       {% elif form_type == 'login' %}
@@ -107,7 +107,7 @@
           autofocus
         />
         {% if form.username.errors %}
-        <div>{{ form.username.errors|join:", " }}</div>
+        <div style="color:red;">{{ form.username.errors|join:", " }}</div>
         {% endif %}
       </div>
       <!-- Password Field -->
@@ -117,7 +117,7 @@
           <input type="password" name="password" id="id_password" required />
         </div>
         {% if form.password.errors %}
-        <div>{{ form.password.errors|join:", " }}</div>
+        <div style="color:red;">{{ form.password.errors|join:", " }}</div>
         {% endif %}
       </div>
       {% endif %}

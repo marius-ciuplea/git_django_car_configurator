@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-
   // Contact page navbar
   const contactLink = document.querySelector(".open-contact-form.active");
 
@@ -14,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const navbar = document.querySelector(".navbar");
   let lastScrollTop = 0;
+
 
   window.addEventListener("scroll", function () {
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
@@ -41,19 +41,24 @@ document.addEventListener("DOMContentLoaded", function () {
   
 
   // Toggle dropdown menu for user profile
-  const toggle = document.getElementById("userDropdownToggle");
-  const menu = document.getElementById("userDropdownMenu");
+const toggle = document.getElementById("userDropdownToggle");
+const menu = document.getElementById("userDropdownMenu");
 
-  if (toggle) {
-    toggle.addEventListener("click", function (e) {
-      e.stopPropagation();
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-    });
+if (toggle) {
+  toggle.addEventListener("click", function (e) {
+    e.stopPropagation();
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  });
 
-    document.addEventListener("click", function () {
-      menu.style.display = "none";
-    });
-  }
+  document.addEventListener("click", function () {
+    menu.style.display = "none";
+  });
+}
+
+
+
+
+  
 
   
 });

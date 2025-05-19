@@ -1,17 +1,5 @@
 {% extends 'base.html' %} {% block content %} {% load static %}
 
-<link rel="stylesheet" href="{% static 'styles/configure.css' %}" />
-
-
-{% if messages %}
-<div class="popup-container">
-  {% for message in messages %}
-    <div class="popup-message alert alert-{{ message.tags }}">
-      {{ message }}
-    </div>
-  {% endfor %}
-</div>
-{% endif %}
 
 
 
@@ -60,7 +48,7 @@
       <div class="car-card-content">
         <h3>{{ car.company_name }} {{ car.model_name }}</h3>
         <p>Alege modelul potrivit pentru tine.</p>
-        <a href="{% url 'configure_car' car.id %}" class="configure-button"
+        <a href="{% url 'create_config' car.id %}" class="configure-button"
           >Configure</a
         >
       </div>
