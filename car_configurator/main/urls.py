@@ -3,11 +3,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import (
                     HomeView,
-                    # ConfigureCarModelView,
                     CreateConfigurationView,
                     UpdateConfigurationView,
                     ConfigureView, 
-                    # configure_car, 
                     about_us,
                     delete_configuration_ajax, 
                     send_offer_ajax
@@ -16,8 +14,6 @@ from .views import (
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    # path('configure/carousel', configure_car, name='configure_carousel'),
-    # path('configure/<int:car_id>/', ConfigureCarModelView.as_view(), name='configure_car'),
     path('configure/create/<int:car_id>/', CreateConfigurationView.as_view(), name='create_config'),
     path('configure/update/<int:config_id>/', UpdateConfigurationView.as_view(), name='update_config'),
     path('configure/', ConfigureView.as_view(), name='configure_car_list'),

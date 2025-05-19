@@ -11,8 +11,8 @@ from django.contrib.auth.forms import  AuthenticationForm
 from django.contrib.auth import login, logout
 from django.views import View
 from django.contrib import messages
-
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from main.models import Configuration
 
 
 class LoginView(View):
@@ -89,47 +89,88 @@ class CustomLogoutView(View):
         return redirect('home')
 
 
-from main.models import Configuration
 
 
-@login_required
-def view_profile(request):
-    # Try to get or create the Profile, fallback if error
-    try:
-        profile, _ = Profile.objects.get_or_create(user=request.user)
-    except Exception:
-        return redirect ('register')
+class ProfileView(LoginRequiredMixin, View):
+    template_name = 'view_profile.html'
 
-    edit_mode = request.GET.get("edit") == "true"
+    def get(self, request):
+        try:
+            profile, _ = Profile.objects.get_or_create(user=request.user)
+        except Exception:
+            return redirect('register')
 
-    if request.method == "POST":
+        edit_mode = request.GET.get("edit") == "true"
+        
+        user_form = ProfileUpdateForm(instance=request.user)
+        profile_form = ProfilePictureForm(instance=profile)
+        user_messages = ContactForm.objects.filter(user=request.user).order_by('-created_at')
+        
+        saved_configs = Configuration.objects.filter(user=request.user, offered_config=False).order_by('-created_at')
+        offered_configs = Configuration.objects.filter(user=request.user, offered_config=True).order_by('-created_at')
+
+        context = {
+            'profile': profile,
+            'edit_mode': edit_mode,
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'user_messages': user_messages,
+            'saved_configs': saved_configs,
+            'offered_configs': offered_configs,
+            'has_saved_configs': saved_configs.exists(),
+            'has_offered_configs': offered_configs.exists(),
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        try:
+            profile, _ = Profile.objects.get_or_create(user=request.user)
+        except Exception:
+            return redirect('register')
+
         user_form = ProfileUpdateForm(request.POST, instance=request.user)
         profile_form = ProfilePictureForm(request.POST, request.FILES, instance=profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.save()
-            
             profile_form.save()
-    
-            messages.success(request, 'Profile updated successfully!',  extra_tags='success-message')
+            messages.success(request, 'Profile updated successfully!', extra_tags='success-message')
             return redirect('view_profile')
-    else:
-        user_form = ProfileUpdateForm(instance=request.user)
-        profile_form = ProfilePictureForm(instance=profile)
-        user_messages =ContactForm.objects.filter(user=request.user).order_by('-created_at')
-        user_config = Configuration.objects.filter(user=request.user).order_by('-created_at')
-    
-    context = {
-        'profile': profile,
-        'edit_mode': edit_mode,
-        'user_form': user_form,
-        'profile_form': profile_form,
-        'user_messages':user_messages,
-        'user_config':user_config,
-    }
 
-    return render(request, 'view_profile.html', context)
+        # If invalid, re-render the page with existing configs and forms
+        user_messages = ContactForm.objects.filter(user=request.user).order_by('-created_at')
+        saved_configs = Configuration.objects.filter(user=request.user, offered_config=False).order_by('-created_at')
+        offered_configs = Configuration.objects.filter(user=request.user, offered_config=True).order_by('-created_at')
+
+        context = {
+            'profile': profile,
+            'edit_mode': True,  # Probably true since user posted update
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'user_messages': user_messages,
+            'saved_configs': saved_configs,
+            'offered_configs': offered_configs,
+            'has_saved_configs': saved_configs.exists(),
+            'has_offered_configs': offered_configs.exists(),
+        }
+        return render(request, self.template_name, context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def contact_view(request):

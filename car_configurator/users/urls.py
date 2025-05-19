@@ -1,11 +1,10 @@
 # users/urls.py
 from django.urls import path
-from .views import view_profile, contact_view, delete_message_ajax
+from .views import contact_view, delete_message_ajax
 from django.contrib.auth import views as auth_views
-from .views import LoginView, RegisterView, CustomLogoutView
+from .views import LoginView, RegisterView, CustomLogoutView, ProfileView
 
 urlpatterns = [
-    path('profile/', view_profile, name='view_profile'), 
     path('contact/', contact_view, name='contact_form'),
     path('delete-message/', delete_message_ajax, name='delete_message_ajax'),
     path('password_change/', auth_views.PasswordChangeView.as_view(
@@ -21,5 +20,6 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('register/', RegisterView.as_view(), name='register'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
+    path('profile/', ProfileView.as_view(), name='view_profile'),
     
 ]

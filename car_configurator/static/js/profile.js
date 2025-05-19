@@ -110,11 +110,18 @@ document.addEventListener("DOMContentLoaded", function () {
       })
       .then(response => response.json())
       .then(data => {
+        const messageContainer = document.getElementById('message-container');
+        messageContainer.innerHTML = ''; // Clear previous messages
+
+        const message = document.createElement('div');
+        message.className = data.success ? 'message success' : 'message error';
+        message.textContent = data.success ? "Offer sent successfully!" : "Error: " + (data.error || "Could not send offer.");
+        
+        messageContainer.appendChild(message);
+
         if (data.success) {
-          alert("Offer sent successfully!");
-          window.location.reload(); // Optional
-        } else {
-          alert("Error: " + (data.error || "Could not send offer."));
+          // Optional: reload the page or do other stuff
+          setTimeout(() => window.location.reload(), 2000);
         }
       })
       .catch(error => {

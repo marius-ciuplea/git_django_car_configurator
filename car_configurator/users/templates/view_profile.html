@@ -1,10 +1,11 @@
-{% extends "base.html" %} {% load static %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 <link rel="stylesheet" href="{% static 'styles/profile_style.css' %}" />
-
-
 
 <div class="profile-container">
 
+  <div id="message-container" class="messages"></div>
 
   <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   <div class="profile-name">
@@ -14,37 +15,35 @@
     <h1>{{ profile.user.username|title }}'s Profile</h1>
   </div>
 
-
   <div class="profile-main-content">
     {% if not edit_mode %}
 
     <div class="profile-left">
-      
-      <!-- Profile details section -->
-    <div class="profile-details-item-container">
-      <h2>Profile Details</h2>
-      <div class="profile-details">
-        
-        <div class="profile-item">
-          
-        </div>
-        <div class="profile-item">
-          <strong>Username:</strong>
-          <p>{{ profile.user.username }}</p>
-        </div>
-        <div class="profile-item">
-          <strong>Email:</strong>
-          <p>{{ profile.user.email }}</p>
-        </div>
 
-        <div class="action-button">
-          <a href="{% url 'view_profile' %}?edit=true">Edit Profile</a>
-        </div>
+      <!-- Profile details section -->
+      <div class="profile-details-item-container">
+        <h2>Profile Details</h2>
+        <div class="profile-details">
+
+          <div class="profile-item">
+            <!-- Could add more details here -->
+          </div>
+          <div class="profile-item">
+            <strong>Username:</strong>
+            <p>{{ profile.user.username }}</p>
+          </div>
+          <div class="profile-item">
+            <strong>Email:</strong>
+            <p>{{ profile.user.email }}</p>
+          </div>
+
+          <div class="action-button">
+            <a href="{% url 'view_profile' %}?edit=true">Edit Profile</a>
+          </div>
         </div>
       </div>
 
       <!-- User messages section -->
-
       <div class="messages-container">
         <h2>Your Messages</h2>
         {% if user_messages %}
@@ -55,12 +54,6 @@
               <strong>Sent:</strong> {{ msg.created_at|date:"Y-m-d H:i" }}
             </p>
             <p class="message-content">{{ msg.message|linebreaksbr }}</p>
-            <!-- <input
-              type="hidden"
-              id="csrf-token"
-              name="csrfmiddlewaretoken"
-              value="{{ csrf_token }}"
-            /> -->
             <button class="delete-btn" data-id="{{ msg.id }}">Delete</button>
           </div>
           {% endfor %}
@@ -73,59 +66,55 @@
           </div>
         {% endif %}
       </div>
-   
-    </div>
 
+    </div>
 
     <div class="profile-right">
 
-        <div class="profile-configs">
-          <h2>Saved Configurations</h2>
+      <div class="profile-configs">
+        <h2>Saved Configurations</h2>
 
-          <div class="config-list">
-            {% for config in user_config %} 
-              {% if not config.offered_config %}
+        <div class="config-list">
+          {% if has_saved_configs %}
+            {% for config in saved_configs %}
+            <div class="saved-config">
 
-                <div class="saved-config">
+              <div class="saved-config-card">
+                <h4>{{ config.car_model.model_name }}</h4>
 
-                  <div class="saved-config-card">
-                    <h4>{{ config.car_model.model_name }}</h4>
+                <hr />
 
-                    <hr />
+                <p><strong>Engine:</strong> {{ config.engine.name }} - {{ config.engine.price }} €</p>
+                <p><strong>Color:</strong> {{ config.color.name }} - {{ config.color.price }} €</p>
+                <p><strong>Wheel:</strong> {{ config.wheel.name }} - {{ config.wheel.price }} €</p>
+                <p><strong>Total Price:</strong> {{ config.total_price }} €</p>
+                <p><em>Created at: {{ config.created_at|date:"d M Y, H:i" }}</em></p>
 
-                    <p><strong>Engine:</strong> {{ config.engine.name }} - {{ config.engine.price }} €</p>
-                    <p><strong>Color:</strong> {{ config.color.name }} - {{ config.color.price }} €</p>
-                    <p><strong>Wheel:</strong> {{ config.wheel.name }} - {{ config.wheel.price }} €</p>
-                    <p><strong>Total Price:</strong> {{ config.total_price }} €</p>
-                    <p><em>Created at: {{ config.created_at|date:"d M Y, H:i" }}</em></p>
-
-                    <div class="saved-config-buttons" id="config-{{ config.id }}">
-                      <a href="{% url 'update_config' config.id  %}" class="saved-update-btn">Update</a>
-                      <a href="#" class="saved-delete-btn" data-id="{{ config.id }}">Delete</a>
-                      <a href="#" class="saved-send-btn" data-id="{{ config.id }}">Send Offer</a>
-                    </div>
-                  
-                  </div>
+                <div class="saved-config-buttons" id="config-{{ config.id }}">
+                  <a href="{% url 'update_config' config.id  %}" class="saved-update-btn">Update</a>
+                  <a href="#" class="saved-delete-btn" data-id="{{ config.id }}">Delete</a>
+                  <a href="#" class="saved-send-btn" data-id="{{ config.id }}">Send Offer</a>
                 </div>
-            
-              {% endif %}
-            {% empty %}
+
+              </div>
+            </div>
+            {% endfor %}
+          {% else %}
             <div class="no-content-container">
               <p class="no-content-paragraph">You have no saved configurations yet.</p>
               <br>
               <a href="{% url 'configure_car_list' %}" class="no-content-button">Configure Now</a>
             </div>
-            {% endfor %}
-          </div>
+          {% endif %}
+        </div>
       </div>
 
       <div class="profile-offers">
-          <h2>Offered Configurations</h2>
-          
-        <div class="offers-list">
-              {% for config in user_config %}
-                {% if config.offered_config %}
+        <h2>Offered Configurations</h2>
 
+        <div class="offers-list">
+          {% if has_offered_configs %}
+            {% for config in offered_configs %}
             <div class="offered-config">
 
               <div class="offered-card">
@@ -135,27 +124,21 @@
                 <p><strong>Color:</strong> {{ config.color.name }} - {{ config.color.price }} €</p>
                 <p><strong>Wheel:</strong> {{ config.wheel.name }} - {{ config.wheel.price }} €</p>
                 <p><strong>Total Price:</strong> {{ config.total_price }} €</p>
-                <p><em>Offered at: {{ config.offered_at|date:"d M Y, H:i" }}</em> </p> 
-                
+                <p><em>Offered at: {{ config.offered_at|date:"d M Y, H:i" }}</em></p>
+
               </div>
 
             </div>
-            
-               
-                {% endif %}
-                
-              {% empty %}
-                 <div class="no-content-container">
-                    <p class="no-content-paragraph">You have no offered configurations sent yet.</p>
-                    <br>
-                    
-                </div>
-              {% endfor %}
-          </div>
+            {% endfor %}
+          {% else %}
+            <div class="no-content-container">
+              <p class="no-content-paragraph">You have no offered configurations sent yet.</p>
+              <br>
+            </div>
+          {% endif %}
+        </div>
 
       </div>
-{% comment %} ------------------------------------------------------------------------------------------------------------------------------------------------------       {% endcomment %}
-    
 
     {% else %}
     <!-- Edit Profile Form -->
@@ -181,8 +164,6 @@
           class="custom-file-input"
         />
       </div>
-
-      <!-- {{ profile_form.profile_picture }} -->
 
       <div class="action-button">
         <a href="{% url 'password_change' %}">Change Password</a>

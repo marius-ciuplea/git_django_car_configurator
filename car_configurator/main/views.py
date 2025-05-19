@@ -7,7 +7,6 @@ from .forms import ConfigurationForm
 from django.contrib import messages
 from django.utils import timezone
 
-
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
@@ -32,7 +31,10 @@ class ConfigureView(TemplateView):
         return context
 
 
-        
+
+
+
+
 class CreateConfigurationView(View):
     def get(self, request, car_id):
         car = get_object_or_404(CarModel, id=car_id)
@@ -150,6 +152,8 @@ def send_offer_ajax(request):
         config.offered_config = True
         config.offered_at = timezone.now()
         config.save()
+        
         return JsonResponse({'success': True})
     except Configuration.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Configuration not found'})
+    

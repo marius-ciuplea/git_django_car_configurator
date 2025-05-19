@@ -598,10 +598,6 @@ input[type="file"] {
 
 
 
-
-
-
-
 /* Unified box style for all major profile sections */
 .profile-details-item-container,
 .profile-configs,
@@ -633,12 +629,6 @@ input[type="file"] {
   margin-top: 80px !important;
   padding: 3px;
 }
-
-
-
-
-  
-
 
 .no-content-container {
   display: flex;
@@ -672,4 +662,17 @@ input[type="file"] {
   background-color: var(--navy);
   color: white;
   transform: scale(1.05);
+}
+
+
+
+#message-container .success {
+  background-color: var(--navy);
+  color: white;
+}
+
+#message-container .error {
+  background-color: rgba(188, 4, 4, 0.9);
+  color: white;
+  backdrop-filter: blur(2px);
 }
