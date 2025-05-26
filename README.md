@@ -8,13 +8,17 @@ Inspired by websites like volkswagen.ro, this app simulates a real-world vehicle
 Users can select:
 
 ✅ Car model
+
 ⚙️ Engine type
+
 🎨 Exterior color
+
 🛞 Wheel style
 
 The app dynamically updates:
 
 💰 Total price based on selected option
+
 📸 Image carousel based on selected color
 
 🔧 Features
