@@ -6,7 +6,7 @@ django.setup()
 
 from django.conf import settings
 from django.core.files import File
-from main.models import CarModel
+from car_configurator.main.models.car_models import CarModel
 
 media_path = os.path.join(settings.MEDIA_ROOT, 'car_images')
 default_image_name = 'car_images/default.jpg'  # Change if your default image name/path is different

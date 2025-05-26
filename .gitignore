@@ -1,7 +1,8 @@
 # Python
 *.pyc
 __pycache__/
-
+assign_images.py
+car_data.json
 # Virtual environment
 venv/
 

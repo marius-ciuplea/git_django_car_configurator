@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView
-from django.urls import reverse_lazy
+from django.urls import reverse
 from .models import CarModel, Engine, Color, Wheel, Configuration
 from .forms import ConfigurationForm
 from django.contrib import messages
@@ -10,6 +10,7 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+
 
 class HomeView(TemplateView):
     template_name = 'home.html'
@@ -44,25 +45,33 @@ class CreateConfigurationView(View):
     def post(self, request, car_id):
         car = get_object_or_404(CarModel, id=car_id)
         form = ConfigurationForm(request.POST, car_model=car)
-        
+
         if form.is_valid():
             config = form.save(commit=False)
             config.car_model = car
-            config.user = request.user
-            config.saved_config = True
 
-            if request.POST.get("action") == "send_offer":
-                config.offered_config = True
-                config.offered_at = timezone.now()
-                messages.success(request, "The offer has been sent successfully!",  extra_tags='success-message')
+            # Only save if user is authenticated
+            if request.user.is_authenticated:
+                config.user = request.user
+                config.saved_config = True
+
+                if request.POST.get("action") == "send_offer":
+                    config.offered_config = True
+                    config.offered_at = timezone.now()
+                    messages.success(request, "The offer has been sent successfully!", extra_tags='success-message')
+                else:
+                    config.offered_config = False
+                    config.offered_at = None
+                    messages.success(request, "Your configuration has been saved!", extra_tags='success-message')
+
+                config.save()
+                return redirect('view_profile')
             else:
-                config.offered_config = False
-                config.offered_at = None
-                messages.success(request, "Your configuration has been saved!",  extra_tags='success-message')
+                messages.warning(request, "You must log in to save or send your configuration.")
+                login_url = reverse('login')
+                return redirect(f"{login_url}?next={request.path}")
 
-            config.save()
-            return redirect('view_profile')
-
+        # If form is invalid
         return render(request, 'configure_car.html', {
             'car': car,
             'form': form,
