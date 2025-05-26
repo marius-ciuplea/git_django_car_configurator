@@ -1,6 +1,7 @@
 Car Configurator – Django Web Application
 
 📌 Project Description
+
 The Car Configurator is a Django web application that allows users to configure and customize a car before requesting a personalized offer.
 Inspired by websites like volkswagen.ro, this app simulates a real-world vehicle configurator experience.
 
