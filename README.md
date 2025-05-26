@@ -61,7 +61,7 @@ Setup Instructions
 ```
 
 7. Optional
- Create a superuser if you want to acces admin panel.
+ Create a superuser if you want to access admin panel
 ```bash
    python manage.py createsuperuser
 ```
