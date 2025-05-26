@@ -24,15 +24,21 @@ The app dynamically updates:
 🔧 Features
 
 Dynamic car configuration system
+
 Real-time price calculation
+
 Image carousel that updates based on color selection
+
 Clean and responsive frontend
+
 Admin interface to manage configurations and pricing
 
 🛠️ Technologies Used
 
 Backend: Python, Django
+
 Frontend: HTML, CSS, JavaScript
+
 Database: SQLite 
 
 
