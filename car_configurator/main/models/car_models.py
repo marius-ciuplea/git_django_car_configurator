@@ -34,7 +34,7 @@ class Color(models.Model):
     
 class ColorImage(models.Model):
     color = models.ForeignKey(Color, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='color_gallery/')
+    image = models.ImageField(upload_to='images/')
     
     def __str__(self):
         return f"Image for {self.color}"
