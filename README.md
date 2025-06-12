@@ -29,6 +29,5 @@ Admin interface to manage configurations and pricing
 
 Backend: Python, Django
 Frontend: HTML, CSS, JavaScript
-Database: SQLite (default, can be switched to PostgreSQL or MySQL)
-Optional: Bootstrap for styling, jQuery for interactivity
+Database: SQLite
 
