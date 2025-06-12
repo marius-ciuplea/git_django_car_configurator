@@ -49,4 +49,29 @@ Instructions:
    ```bash
    git clone https://github.com/marius-ciuplea/git_django_car_configurator.git
    ```
-2. 
+2. Create a virtual env (Optionally)
+   ```bash
+   python -m virtualenv "name_env"
+   ```
+3. Run requirements.txt
+   ```bash
+   python manage.py -r requirements.txt
+4. Make migrations
+   ```bash
+   python manage.py migrate
+   ```
+5. Load fixtures
+   ```bash
+   python manage.py loaddata car_data.json
+   ```
+   ```bash
+   python manage.py loaddata colors_and_images.json
+   ```
+6. Assign images to models
+   ```bash
+   python manage.py assign_car_images
+   ```
+
+
+## 👤 Author
+- **marius-ciuplea** - [GitHub](https://github.com/marius-ciuplea)
