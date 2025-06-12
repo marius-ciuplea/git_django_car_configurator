@@ -43,3 +43,10 @@ Frontend: HTML, CSS, JavaScript
 
 Database: SQLite
 
+Instructions:
+
+1. Use
+   ```bash
+   git clone https://github.com/marius-ciuplea/git_django_car_configurator.git
+   ```
+2. 
