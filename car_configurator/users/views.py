@@ -68,6 +68,7 @@ class RegisterView(View):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
+            user.email = user.email.lower()
             user.save()
             login(request, user)
             return redirect('home')
@@ -131,6 +132,8 @@ class ProfileView(LoginRequiredMixin, View):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
+            user.username = user.username.lower()
+            user.email = user.email.lower()
             user.save()
             profile_form.save()
             messages.success(request, 'Profile updated successfully!', extra_tags='success-message')
@@ -143,7 +146,7 @@ class ProfileView(LoginRequiredMixin, View):
 
         context = {
             'profile': profile,
-            'edit_mode': True,  # Probably true since user posted update
+            'edit_mode': True,
             'user_form': user_form,
             'profile_form': profile_form,
             'user_messages': user_messages,

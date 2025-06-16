@@ -82,7 +82,7 @@
 
                 <p><strong>Engine:</strong> {{ config.engine.name }} - {{ config.engine.price }} €</p>
                 <p><strong>Color:</strong> {{ config.color.name }} - {{ config.color.price }} €</p>
-                <p><strong>Wheel:</strong> {{ config.wheel.name }} - {{ config.wheel.price }} €</p>
+                <p><strong>Wheel:</strong>  {{ config.wheel.style }} {{config.wheel.size}}" - {{ config.wheel.price }} €</p>
                 <p><strong>Total Price:</strong> {{ config.total_price }} €</p>
                 <p><em>Created at: {{ config.created_at|date:"d M Y, H:i" }}</em></p>
 
@@ -114,11 +114,11 @@
             <div class="offered-config">
 
               <div class="offered-card">
-                <h4>{{ config.car_model.model_name }} (Offered)</h4>
+                <h4>{{ config.car_model.model_name }}</h4>
                 <hr>
                 <p><strong>Engine:</strong> {{ config.engine.name }} - {{ config.engine.price }} €</p>
                 <p><strong>Color:</strong> {{ config.color.name }} - {{ config.color.price }} €</p>
-                <p><strong>Wheel:</strong> {{ config.wheel.name }} - {{ config.wheel.price }} €</p>
+                <p><strong>Wheel:</strong> {{ config.wheel.style }} {{config.wheel.size}}" - {{ config.wheel.price }} €</p>
                 <p><strong>Total Price:</strong> {{ config.total_price }} €</p>
                 <p><em>Offered at: {{ config.offered_at|date:"d M Y, H:i" }}</em></p>
 

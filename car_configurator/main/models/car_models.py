@@ -14,7 +14,7 @@ class CarModel(models.Model):
 
 
 class Engine(models.Model):
-    car_model = models.ForeignKey(CarModel, related_name='engines', on_delete=models.CASCADE)  # Now linked to a car model
+    car_model = models.ForeignKey(CarModel, related_name='engines', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     types = models.CharField(max_length=100)
     power = models.IntegerField()
@@ -24,7 +24,7 @@ class Engine(models.Model):
         return f"{self.name} - {self.power} HP" 
 
 class Color(models.Model):
-    car_model = models.ForeignKey(CarModel, related_name='colors', on_delete=models.CASCADE)  # Now linked to a car model
+    car_model = models.ForeignKey(CarModel, related_name='colors', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     hex_code = models.CharField(max_length=7)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00,  null=True, blank=True)
@@ -72,11 +72,4 @@ class Configuration(models.Model):
         
     def __str__(self):
         return f"{self.user.username}'s {self.car_model.model_name} config"
-    
-    
-    
-
-
-# class ClientRequestsModel(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     

@@ -71,7 +71,6 @@ class CreateConfigurationView(View):
                 login_url = reverse('login')
                 return redirect(f"{login_url}?next={request.path}")
 
-        # If form is invalid
         return render(request, 'configure_car.html', {
             'car': car,
             'form': form,
@@ -124,7 +123,7 @@ class UpdateConfigurationView(View):
             'colors': Color.objects.filter(car_model=car),
             'engines': Engine.objects.filter(car_model=car),
             'wheels': Wheel.objects.filter(car_model=car),
-            'config_id': config_id  # 👈 same here
+            'config_id': config_id  
         })
 
 

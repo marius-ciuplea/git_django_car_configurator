@@ -45,9 +45,6 @@ class CarModelAdmin(admin.ModelAdmin):
     actions = ['assign_car_images', 'remove_car_images']  # Acțiune custom în admin
 
     def assign_car_images(self, request, queryset):
-        import os
-        from django.conf import settings
-        from django.core.files import File
 
         media_path = os.path.join(settings.MEDIA_ROOT, 'car_images')
         default_image_name = 'car_images/default.jpg'
