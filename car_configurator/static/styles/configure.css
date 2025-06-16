@@ -37,7 +37,6 @@ h1 {
 
 /* Individual car card */
 .car-card {
-  background-color: white;
   width: calc(33.33% - 1rem);  /* 3 cards per row, minus the gap */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
