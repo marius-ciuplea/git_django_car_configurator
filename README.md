@@ -1,48 +1,39 @@
-Car Configurator – Django Web Application
+🚗 Car Configurator – Django Web Application
+📌 Overview
 
-📌 Project Description
+The Car Configurator is a full-stack Django web application that allows users to configure and customize a car before requesting a personalized offer.
 
-The Car Configurator is a full-stack Django web application that allows users to configure and customize a car before requesting a personalized offer. Inspired by websites like volkswagen.ro, this app simulates a real-world vehicle configurator experience.
+Inspired by real-world vehicle configurators (e.g., volkswagen.ro), this project demonstrates skills in backend development, dynamic frontends, and database integration.
 
-Users can select:
+✨ Features
 
-✅ Car model
+✅ Selectable car model, engine type, exterior color, and wheel style
 
-⚙️ Engine type
+💰 Real-time price calculation based on selected options
 
-🎨 Exterior color
+🎨 Dynamic image carousel that updates with the selected color
 
-🛞 Wheel style
+✉️ Send Offer functionality for personalized requests
 
-The app dynamically updates:
+🛠️ Admin interface to manage configurations and pricing
 
-💰 Total price based on selected option
+📱 Clean and responsive frontend
 
-📸 Image carousel based on selected color
 
-✉️ Ability to send an offer request
 
-🔧 Features
-
-Dynamic car configuration system
-
-Real-time price calculation
-
-Image carousel that updates based on color selection
-
-Custom "Send Offer" functionality
-
-Clean and responsive frontend
-
-Admin interface to manage configurations and pricing
-
-🛠️ Technologies Used
+🛠️ Technologies
 
 Backend: Python, Django
 
 Frontend: HTML, CSS, JavaScript
 
-Database: SQLite
+Database: SQLite (easily switchable to PostgreSQL/MySQL)
+
+<img width="1888" height="644" alt="image" src="https://github.com/user-attachments/assets/1f46fbff-8f1c-4049-9d4c-3ab6c942ad06" />
+
+<img width="1901" height="901" alt="image" src="https://github.com/user-attachments/assets/2263387a-629d-4e91-bbf3-ad58574abd12" />
+
+
 
 Instructions:
 
