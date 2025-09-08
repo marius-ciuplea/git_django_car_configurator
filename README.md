@@ -33,6 +33,9 @@ Database: SQLite (easily switchable to PostgreSQL/MySQL)
 
 <img width="1901" height="901" alt="image" src="https://github.com/user-attachments/assets/2263387a-629d-4e91-bbf3-ad58574abd12" />
 
+<img width="1385" height="891" alt="image" src="https://github.com/user-attachments/assets/c2ee42df-5072-4fb6-a6e8-f9d24f5127f5" />
+
+
 
 
 Instructions:
