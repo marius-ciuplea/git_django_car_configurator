@@ -27,7 +27,7 @@ Backend: Python, Django
 
 Frontend: HTML, CSS, JavaScript
 
-Database: SQLite (easily switchable to PostgreSQL/MySQL)
+Database: SQLite
 
 <img width="1888" height="644" alt="image" src="https://github.com/user-attachments/assets/1f46fbff-8f1c-4049-9d4c-3ab6c942ad06" />
 
