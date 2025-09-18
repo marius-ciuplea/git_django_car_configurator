@@ -1,3 +1,4 @@
+from .tasks import send_offer_email
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView
@@ -14,13 +15,13 @@ from django.contrib.auth.decorators import login_required
 
 class HomeView(TemplateView):
     template_name = 'home.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cars'] = CarModel.objects.all()[:3]
-        context['user'] = self.request.user 
+        context['user'] = self.request.user
         return context
-    
+
 
 class ConfigureView(TemplateView):
     template_name = 'configure.html'
@@ -29,6 +30,7 @@ class ConfigureView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['cars'] = CarModel.objects.all()
         return context
+
 
 class CreateConfigurationView(View):
     def get(self, request, car_id):
@@ -58,16 +60,27 @@ class CreateConfigurationView(View):
                 if request.POST.get("action") == "send_offer":
                     config.offered_config = True
                     config.offered_at = timezone.now()
-                    messages.success(request, "The offer has been sent successfully!", extra_tags='success-message')
+
+                    config.save()
+
+                    # send email to user
+                    send_offer_email.delay(request.user.email)
+
+                    messages.success(
+                        request, "The offer has been sent successfully! Check your email for confirmation.", extra_tags='success-message')
+                    return redirect('view_profile')
                 else:
                     config.offered_config = False
                     config.offered_at = None
-                    messages.success(request, "Your configuration has been saved!", extra_tags='success-message')
+                    config.save()
+                    messages.success(
+                        request, "Your configuration has been saved!", extra_tags='success-message')
 
-                config.save()
-                return redirect('view_profile')
+                    return redirect('view_profile')
+                
             else:
-                messages.warning(request, "You must log in to save or send your configuration.")
+                messages.warning(
+                    request, "You must log in to save or send your configuration.")
                 login_url = reverse('login')
                 return redirect(f"{login_url}?next={request.path}")
 
@@ -78,12 +91,12 @@ class CreateConfigurationView(View):
             'engines': Engine.objects.filter(car_model=car),
             'wheels': Wheel.objects.filter(car_model=car)
         })
-        
-        
-        
+
+
 class UpdateConfigurationView(View):
     def get(self, request, config_id):
-        configuration = get_object_or_404(Configuration, id=config_id, user=request.user)
+        configuration = get_object_or_404(
+            Configuration, id=config_id, user=request.user)
         car = configuration.car_model
         form = ConfigurationForm(instance=configuration, car_model=car)
 
@@ -97,21 +110,25 @@ class UpdateConfigurationView(View):
         })
 
     def post(self, request, config_id):
-        configuration = get_object_or_404(Configuration, id=config_id, user=request.user)
+        configuration = get_object_or_404(
+            Configuration, id=config_id, user=request.user)
         car = configuration.car_model
-        form = ConfigurationForm(request.POST, instance=configuration, car_model=car)
+        form = ConfigurationForm(
+            request.POST, instance=configuration, car_model=car)
 
         if form.is_valid():
             config = form.save(commit=False)
-            
+
             if request.POST.get("action") == "send_offer":
                 config.offered_config = True
                 config.offered_at = timezone.now()
-                messages.success(request, "The offer has been sent successfully!",  extra_tags='success-message')
+                messages.success(
+                    request, "The offer has been sent successfully!",  extra_tags='success-message')
             else:
                 config.offered_config = False
                 config.offered_at = None
-                messages.success(request, "Your configuration has been updated!",  extra_tags='success-message')
+                messages.success(
+                    request, "Your configuration has been updated!",  extra_tags='success-message')
 
             config.saved_config = True
             config.save()
@@ -123,7 +140,7 @@ class UpdateConfigurationView(View):
             'colors': Color.objects.filter(car_model=car),
             'engines': Engine.objects.filter(car_model=car),
             'wheels': Wheel.objects.filter(car_model=car),
-            'config_id': config_id  
+            'config_id': config_id
         })
 
 
@@ -140,7 +157,6 @@ def delete_configuration_ajax(request):
     return JsonResponse({'success': True})
 
 
-
 @login_required
 @require_POST
 def send_offer_ajax(request):
@@ -152,8 +168,7 @@ def send_offer_ajax(request):
         config.offered_config = True
         config.offered_at = timezone.now()
         config.save()
-        
+
         return JsonResponse({'success': True})
     except Configuration.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Configuration not found'})
-    
