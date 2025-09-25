@@ -5,7 +5,7 @@ from ai_agent.tools.execute_queries import execute_sql_query
 
 prompt_to_sql_agent = LlmAgent(
     name="prompt_to_sql_agent",
-    model="gemini-1.5-flash",
+    model="gemini-2.5-flash",
     description="A helpful agent that can generate SQL queries from user prompts",
     instruction=PROMPT_TO_SQL_INSTRUCTIONS,
     tools=[execute_sql_query],
