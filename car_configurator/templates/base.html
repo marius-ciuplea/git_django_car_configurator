@@ -34,12 +34,6 @@
       {% include 'footer.html' %}
     </div>
 
-    {% if request.user.is_authenticated %}
-        {% include 'chat_widget.html' %}
-    {% endif %}
-
     <script src="{% static 'js/script.js' %}"></script>
-
-    <script src="{% static 'js/chat_api.js' %}"></script> 
   </body>
 </html>
