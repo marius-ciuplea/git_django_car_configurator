@@ -11,7 +11,6 @@ from .views import (
                     send_offer_ajax
                 )
 
-
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('configure/create/<int:car_id>/', CreateConfigurationView.as_view(), name='create_config'),
@@ -20,6 +19,7 @@ urlpatterns = [
     path('about_us/', about_us, name='about-us'),
     path('delete-configuration/', delete_configuration_ajax, name='delete_configuration_ajax'),
     path('send-offer/', send_offer_ajax, name='send_offer_ajax'),
+    
 ]
 
 if settings.DEBUG:

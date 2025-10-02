@@ -32,7 +32,7 @@ if not SECRET_KEY:
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'users',
     'ai_agent',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -112,6 +113,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 
 
 # Internationalization

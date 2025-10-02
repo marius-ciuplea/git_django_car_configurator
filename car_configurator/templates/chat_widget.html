@@ -1,0 +1,12 @@
+<div class="chat-container">
+    <div id="chat-output">
+        Bun venit la Configuratorul Auto! Întreabă-mă despre configurația mașinii tale.
+    </div>
+
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Configurează-ți mașina..." onkeydown="if(event.key === 'Enter') sendPrompt()">
+        <button onclick="sendPrompt()">Trimite</button>
+    </div>
+
+    <div id="status-message"></div>
+</div>
