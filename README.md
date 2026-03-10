@@ -1,3 +1,5 @@
+AI-chatbot integration in progres...
+
 🚗 Car Configurator – Django Web Application
 📌 Overview
 
