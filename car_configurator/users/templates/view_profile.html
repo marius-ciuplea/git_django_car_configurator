@@ -65,7 +65,7 @@
         {% endif %}
       </div>
     </div>
-
+    <!--User Saved Configurations-->
     <div class="profile-right">
       <div class="profile-configs">
         <h2>Saved Configurations</h2>
@@ -91,8 +91,11 @@
                   <a href="#" class="saved-delete-btn" data-id="{{ config.id }}">Delete</a>
                   <a href="#" class="saved-send-btn" data-id="{{ config.id }}">Send Offer</a>
                 </div>
-
+ <a href="{% url 'download_pdf' config.id %}" class="btn btn-primary">
+                  Download offer PDF
+              </a>
               </div>
+             
             </div>
             {% endfor %}
           {% else %}
@@ -104,7 +107,7 @@
           {% endif %}
         </div>
       </div>
-
+      <!--User Offered Configurations -->
       <div class="profile-offers">
         <h2>Offered Configurations</h2>
 

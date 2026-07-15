@@ -8,7 +8,8 @@ from .views import (
                     ConfigureView, 
                     about_us,
                     delete_configuration_ajax, 
-                    send_offer_ajax
+                    send_offer_ajax,
+                    download_offer_pdf
                 )
 
 urlpatterns = [
@@ -19,6 +20,7 @@ urlpatterns = [
     path('about_us/', about_us, name='about-us'),
     path('delete-configuration/', delete_configuration_ajax, name='delete_configuration_ajax'),
     path('send-offer/', send_offer_ajax, name='send_offer_ajax'),
+    path('configuration/<int:config_id>/pdf/', download_offer_pdf, name='download_pdf'),
     
 ]
 

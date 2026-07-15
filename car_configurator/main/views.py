@@ -172,3 +172,21 @@ def send_offer_ajax(request):
         return JsonResponse({'success': True})
     except Configuration.DoesNotExist:
         return JsonResponse({'success': False, 'error': 'Configuration not found'})
+
+
+from django.http import FileResponse
+from .exporters import ExportPDF
+
+@login_required
+def download_offer_pdf(request, config_id):
+    configuration = get_object_or_404(Configuration, id=config_id, user=request.user)
+
+    exporter = ExportPDF()
+    pdf_buffer = exporter.generate(configuration)
+
+    return FileResponse(
+        pdf_buffer,
+        as_attachment=True,
+        filename=f"offer_{configuration.car_model.model_name.lower()}_{config_id}.pdf"
+    
+    ) 
