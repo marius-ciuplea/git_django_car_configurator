@@ -114,7 +114,7 @@ class CarModelAdmin(admin.ModelAdmin):
 # Admin for viewing and managing user configurations
 @admin.register(Configuration)
 class ConfigurationAdmin(admin.ModelAdmin):
-    list_display = ('user', 'car_model', 'engine', 'color', 'wheel', 'created_at', 'get_total_price', 'offered_config', 'get_total_price')
+    list_display = ('user', 'car_model', 'engine', 'color', 'wheel', 'created_at', 'get_total_price', 'offered_config', 'saved_config', 'get_total_price')
     search_fields = ('user__username', 'car_model__model_name','saved_config', 'offered_config')
     list_filter = ('car_model', 'engine', 'color', 'wheel')
     readonly_fields = ('get_total_price',)  # Optional: show in detail view

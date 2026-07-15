@@ -55,6 +55,7 @@ class Configuration(models.Model):
     color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True)
     wheel = models.ForeignKey(Wheel, on_delete=models.SET_NULL, null=True)
     offered_config = models.BooleanField(default=False, blank=True, null=True)
+    saved_config = models.BooleanField(default=False, blank=True, null=True)
     offered_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     

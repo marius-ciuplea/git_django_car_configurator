@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'main',
     'django.contrib.humanize',
     'users',
-    'ai_agent',
+    # 'ai_agent',
     'rest_framework',
 ]
 
