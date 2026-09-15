@@ -72,7 +72,7 @@ Instructions:
    python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
    ```
    ```bash
-   echo "DJANGO_SECRET_KEY=your-generated-key-here" > .env
+   echo 'DJANGO_SECRET_KEY=your-generated-key-here' > .env
    ```
 8. Load fixtures
    ```bash
