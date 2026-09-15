@@ -4,8 +4,8 @@
     "pk": 1,
     "fields": {
       "company_name": "Volkswagen",
-      "model_name": "Tiguan"
-    
+      "model_name": "Tiguan",
+      "image": "car_images/tiguan.jpg"
     }
   },
   {
@@ -13,8 +13,8 @@
     "pk": 2,
     "fields": {
       "company_name": "Volkswagen",
-      "model_name": "Golf"
-      
+      "model_name": "Golf",
+      "image": "car_images/golf.jpg"
     }
   },
   {
@@ -22,8 +22,8 @@
     "pk": 3,
     "fields": {
       "company_name": "Volkswagen",
-      "model_name": "ID7"
-      
+      "model_name": "ID7",
+      "image": "car_images/id7.jpg"
     }
   },
   {
@@ -31,7 +31,8 @@
     "pk": 4,
     "fields": {
       "company_name": "Volkswagen",
-      "model_name": "Passat"
+      "model_name": "Passat",
+      "image": "car_images/passat.jpg"
     }
   },
   {
@@ -39,8 +40,8 @@
     "pk": 5,
     "fields": {
       "company_name": "Volkswagen",
-      "model_name": "Polo"
-    
+      "model_name": "Polo",
+      "image": "car_images/polo.jpg"
     }
   },
   {
@@ -48,8 +49,8 @@
     "pk": 6,
     "fields": {
       "company_name": "Volkswagen",
-      "model_name": "Touareg"
-      
+      "model_name": "Touareg",
+      "image": "car_images/touareg.jpg"
     }
   },
   {
