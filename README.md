@@ -67,13 +67,24 @@ Instructions:
    ```bash
    python manage.py migrate
    ```
-7. Load fixtures
+7. Create Django Secret Key
+   ```bash
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
+   ```bash
+   echo "DJANGO_SECRET_KEY=your-generated-key-here" > .env
+   ```
+8. Load fixtures
    ```bash
    python manage.py loaddata car_data.json
    ```
    ```bash
    python manage.py loaddata colors_and_images.json
    ```
+9. Run server
+    ```bash
+    python manage.py runserver
+    ```
 
 
 ## 👤 Author
