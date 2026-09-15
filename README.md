@@ -48,17 +48,22 @@ Instructions:
    ```
 2. Create a virtual env (Optionally)
    ```bash
-   python -m virtualenv "name_env"
+   python -m venv "name_env"
    ```
-3. Run requirements.txt
+   
+3.Activate virtual env
+   ```bash
+  source name_env/Scripts/activate   # Windows, Git Bash
+   ```
+4. Run requirements.txt
    ```bash
    pip install -r requirements.txt
    ```
-4. Make migrations
+5. Make migrations
    ```bash
    python manage.py migrate
    ```
-5. Load fixtures
+6. Load fixtures
    ```bash
    python manage.py loaddata car_data.json
    ```
