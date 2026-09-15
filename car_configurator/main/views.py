@@ -64,7 +64,7 @@ class CreateConfigurationView(View):
                     config.save()
 
                     # send email to user
-                    send_offer_email.delay(request.user.email)
+                    # send_offer_email.delay(request.user.email)
 
                     messages.success(
                         request, "The offer has been sent successfully! Check your email for confirmation.", extra_tags='success-message')

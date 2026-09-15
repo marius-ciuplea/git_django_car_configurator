@@ -3,7 +3,7 @@
     <link rel="stylesheet" href="{% static 'styles/configure_car.css' %}">
 
     <div class="main-content">
-      
+
       <div class="carousel">
         <div class="carousel-track"></div>
         <button class="carousel-btn prev">&#10094;</button>
@@ -94,7 +94,7 @@
             </p>
           </div>
 
-          <div class="buttons-form-container"> 
+          <div class="buttons-form-container">
             <form method="post">
 
               {% csrf_token %}
@@ -111,7 +111,7 @@
               <label for="color">Choose color:</label>
               <select id="color" name="color">
                 {% for color in colors %}
-                <option 
+                <option
                 value="{{ color.id }}"
                 data-price="{{ color.price }}"
                 data-images='[{% for img in color.images.all %}"{{ img.image.url }}"{% if not forloop.last %}, {% endif %}{% endfor %}]'
@@ -129,7 +129,7 @@
                 </option>
               {% endfor %}
             </select>
-          
+
             <p>Base price: <span id="basePrice">{{ car.base_price }}</span> €</p>
             <p><strong>Total price: <span id="totalPrice"></span> €</strong></p>
           </div>
@@ -137,7 +137,7 @@
 
             <button type="submit" name="action" value="send_offer" class="send-offer-btn">Send Offer</button>
           </form>
-        </div>  
+        </div>
         <!-- Aici se termina -->
 
         </div>

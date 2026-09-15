@@ -50,8 +50,6 @@
           const selectedOption = document.querySelector(
             `#color option[value="${colorId}"]`
           );
-          const colorName = selectedOption.textContent.trim();
-          const colorPrice = selectedOption.dataset.price;
 
           // Hide all other color info divs
           document.querySelectorAll(".color-info").forEach((infoDiv) => {
@@ -82,13 +80,15 @@
         const select = document.getElementById(selectId);
         if (!select || select.selectedIndex === -1) return 0;
         const selectedOption = select.options[select.selectedIndex];
-        return parseFloat(selectedOption.dataset.price || 0);
+        const price = parseFloat(selectedOption.dataset.price);
+        return isNaN(price) ? 0 : price;
       }
 
       function updateTotalPrice() {
-        const basePrice = parseFloat(
+        const basePriceRaw = parseFloat(
           document.getElementById("basePrice").innerText
         );
+        const basePrice = isNaN(basePriceRaw) ? 0 : basePriceRaw;
         const engineSelect = document.getElementById("engine");
         const colorSelect = document.getElementById("color");
         const wheelSelect = document.getElementById("wheel");
