@@ -52,7 +52,8 @@ Instructions:
    ```
 3. Run requirements.txt
    ```bash
-   python manage.py -r requirements.txt
+   pip install -r requirements.txt
+   ```
 4. Make migrations
    ```bash
    python manage.py migrate
@@ -63,10 +64,6 @@ Instructions:
    ```
    ```bash
    python manage.py loaddata colors_and_images.json
-   ```
-6. Assign images to models
-   ```bash
-   python manage.py assign_car_images
    ```
 
 
