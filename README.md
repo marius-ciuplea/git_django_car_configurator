@@ -53,17 +53,21 @@ Instructions:
    
 3.Activate virtual env
    ```bash
-  source name_env/Scripts/activate   # Windows, Git Bash
+   source name_env/Scripts/activate   # Windows, Git Bash
    ```
 4. Run requirements.txt
    ```bash
    pip install -r requirements.txt
    ```
-5. Make migrations
+5. Move to car_configurator
+   ```bash
+   cd car_configurator/
+   ```
+6. Make migrations
    ```bash
    python manage.py migrate
    ```
-6. Load fixtures
+7. Load fixtures
    ```bash
    python manage.py loaddata car_data.json
    ```
